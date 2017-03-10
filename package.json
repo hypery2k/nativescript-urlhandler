@@ -1,0 +1,58 @@
+{
+  "name": "nativescript-urlhandler",
+  "version": "0.1.0",
+  "description": "Register custom URLs for your NativeScript app",
+  "scripts": {
+    "clean": "npm i rimraf && rimraf node_modules lib hooks platforms target '**/*.js' '**/*.js.map' 'app/**/*.js' 'app/**/*.js.map' && npm i",
+    "prebuild": "npm run tslint",
+    "build": "npm run tsc",
+    "tsc": "tsc",
+    "tslint": "tslint \"*.ts\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "changelog:add": "git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md'",
+    "release:pre": "npm run clean && npm run test",
+    "release:post": "npm run changelog && npm run changelog:add",
+    "release:major": "npm run release:pre && npm version major && npm run release:post && git push origin && git push origin --tags && npm publish",
+    "release:minor": "npm run release:pre && npm version minor && npm run release:post && git push origin && git push origin --tags && npm publish",
+    "release:patch": "npm run release:pre && npm version patch && npm run release:post && git push origin && git push origin --tags && npm publish"
+  },
+  "main": "urlhandler",
+  "typings": "urlhandler.d.ts",
+  "nativescript": {
+    "platforms": {
+      "ios": "^2.1.0",
+      "android": "^2.1.0"
+    }
+  },
+  "dependencies": {},
+  "peerDependenciesendencies": {
+    "nativescript-theme-core": "^1.0.2",
+    "tns-core-modules": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/jasmine": "2.5.35",
+    "conventional-changelog-cli": "1.2.0",
+    "nativescript-dev-typescript": "0.3.7",
+    "rimraf": "2.6.1",
+    "tns-core-modules": "2.5.1",
+    "tns-platform-declarations": "2.5.0",
+    "tslint": "4.3.1",
+    "tslint-eslint-rules": "2.1.0",
+    "typescript": "2.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hypery2k/nativescript-urlhandler.git"
+  },
+  "keywords": [
+    "NativeScript",
+    "URL-Handler"
+  ],
+  "author": "Martin Reinhardt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hypery2k/nativescript-urlhandler/issues"
+  },
+  "homepage": "https://github.com/hypery2k/nativescript-urlhandler"
+}

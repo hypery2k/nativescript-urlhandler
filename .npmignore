@@ -1,0 +1,12 @@
+.idea
+.vscode
+build.xcconfig
+app/
+demo/
+hooks/
+node_modules
+*.gif
+*.jpg
+*.png
+*.log
+!*.d.ts
