@@ -1,4 +1,6 @@
 # nativescript-urlhandler
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/hypery2k/nativescript-urlhandler.svg)](https://greenkeeper.io/)
 NativeScript URL Handler Plugin
 
 
