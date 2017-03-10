@@ -21,14 +21,12 @@
   "typings": "urlhandler.d.ts",
   "nativescript": {
     "platforms": {
-      "ios": "^2.1.0",
-      "android": "^2.1.0"
+      "android": "2.3.0",
+      "ios": "2.3.0"
     }
   },
-  "dependencies": {},
-  "peerDependenciesendencies": {
-    "nativescript-theme-core": "^1.0.2",
-    "tns-core-modules": "^2.1.0"
+  "dependencies": {
+    "nativescript-theme-core": "^1.0.2"
   },
   "devDependencies": {
     "@types/jasmine": "2.5.44",
