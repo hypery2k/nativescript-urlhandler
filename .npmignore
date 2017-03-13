@@ -9,4 +9,5 @@ node_modules
 *.jpg
 *.png
 *.log
+*.ts
 !*.d.ts
