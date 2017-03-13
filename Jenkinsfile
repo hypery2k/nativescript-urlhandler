@@ -22,7 +22,7 @@ node('nativescript') {
         }
 
         stage('Build') {
-            sh "npm install && npm run build"
+            sh "npm run clean && npm run build"
         }
 
         stage('Test') {
@@ -31,9 +31,9 @@ node('nativescript') {
         }
 
         stage('Publish NPM snapshot') {
-            def currentVersionCore = sh(returnStdout: true, script: "npm version | grep \"{\" | tr -s ':'  | cut -d \"'\" -f 4").trim()
-            def newVersionCore = "${currentVersionCore}-${branchName}-${buildNumber}"
-            sh "npm version ${newVersionCore} --no-git-tag-version && npm publish --tag next"
+            def currentVersion = sh(returnStdout: true, script: "npm version | grep \"{\" | tr -s ':'  | cut -d \"'\" -f 4").trim()
+            def newVersion = "${currentVersion}-${branchName}-${buildNumber}"
+            sh "npm version ${newVersion} --no-git-tag-version && npm publish --tag next"
         }
 
     } catch (e) {
