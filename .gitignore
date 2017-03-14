@@ -52,7 +52,6 @@ __build__/**
 /doc/
 
 # IDE #
-.babelrc
 .idea/
 *.swp
 *.tgz
