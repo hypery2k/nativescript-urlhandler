@@ -1,5 +1,6 @@
 .idea
 .vscode
+.babelrc
 build.xcconfig
 app/
 demo/

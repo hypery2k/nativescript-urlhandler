@@ -1,7 +1,7 @@
 
 import * as application from 'application';
 import { getCallback, extractAppURL } from './urlhandler.common';
-
+export { handleOpenURL } from './urlhandler.common';
 declare var android: any;
 
 application.android.on(application.AndroidApplication.activityResumedEvent, (args) => {

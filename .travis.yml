@@ -16,6 +16,7 @@ script:
   - export ANDROID_HOME=/usr/local/opt/android-sdk
   - export PATH=$PATH:/usr/local/opt/android-sdk/tools:/usr/local/opt/android-sdk/platform-tools
   - npm run build
+  - npm run test
 before_install:
   - export ANDROID_HOME=/usr/local/opt/android-sdk
   - export PATH=$PATH:/usr/local/opt/android-sdk/tools:/usr/local/opt/android-sdk/platform-tools

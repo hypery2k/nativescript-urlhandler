@@ -26,8 +26,8 @@ node('nativescript') {
         }
 
         stage('Test') {
-            //sh "PLATFORM=android npm run test"
-            //junit 'test/android/build/reports/TEST-*.xml'
+            sh "npm run test"
+            junit 'target/junit-report/junitresults-*.xml'
         }
 
         stage('Publish NPM snapshot') {
