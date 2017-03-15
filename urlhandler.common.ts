@@ -1,8 +1,9 @@
 import { AppURL, UrlHandlerCallback } from './urlhandler';
 var URL_HANDLER_CB: UrlHandlerCallback;
 
-export function extractAppURL(url: String): AppURL {
-    let params = new Map<String, String>(),
+export function extractAppURL(urlParam: any): AppURL {
+    let url = <String>urlParam,
+        params = new Map<String, String>(),
         path = url.substring(url.indexOf('//') + 2, url.indexOf('?')),
         parameters = url.substring(url.indexOf('?') + 1).split('&');
     // create JSON object
