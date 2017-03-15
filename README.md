@@ -4,8 +4,6 @@
 [![Build Status](https://travis-ci.org/hypery2k/nativescript-urlhandler.svg?branch=master)](https://travis-ci.org/hypery2k/nativescript-urlhandler)
 [![npm version](https://badge.fury.io/js/nativescript-urlhandler.svg)](http://badge.fury.io/js/nativescript-urlhandler)
 
-Plugin is still **WIP**, **Not** finished yet
-
 [![NPM](https://nodei.co/npm/nativescript-urlhandler.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/nativescript-urlhandler/)
 
 > Feel free to **donate**
@@ -20,6 +18,24 @@ Plugin is still **WIP**, **Not** finished yet
 
 # Usage
 
+Just add App links to your app, see iOS and Android instructions below, and register a handler for the URL data:
+```
+import { Component } from "@angular/core";
+import { handleOpenURL, AppURL } from 'nativescript-urlhandler';
+
+@Component({
+  selector: "gr-main",
+  template: "<page-router-outlet></page-router-outlet>"
+})
+export class AppComponent {
+    constructor() {
+      handleOpenURL((appURL: AppURL) => {
+        console.log('Got the following appURL', appURL);
+      });
+    }
+}
+
+```
 
 
 
