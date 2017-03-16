@@ -23,7 +23,8 @@ export function extractAppURL(urlParam: any): AppURL {
         }
         return {
             params: params,
-            path: path
+            path: path,
+            toString: () => url
         };
     } else {
         return null;

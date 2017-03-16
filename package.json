@@ -3,7 +3,9 @@
   "version": "0.2.0",
   "description": "Register custom URLs for your NativeScript app",
   "scripts": {
-    "clean": "npm i rimraf && rimraf node_modules lib hooks platforms target '*.js' '*.js.map' 'app/**/*.js' 'app/**/*.js.map' && npm i",
+    "preclean": "npm i rimraf",
+    "clean": "rimraf node_modules lib hooks platforms target '*.js' '*.js.map' 'app/**/*.js' 'app/**/*.js.map' && npm i",
+    "postclean": "npm i",
     "prebuild": "npm run tslint",
     "build": "npm run tsc",
     "tsc": "tsc",
