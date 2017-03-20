@@ -1,3 +1,19 @@
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/hypery2k/nativescript-urlhandler/compare/v0.2.0...v0.3.0) (2017-03-20)
+
+
+### Bug Fixes
+
+* **reinvocation-error:** Remember state to no invoke a second time ([d810a40](https://github.com/hypery2k/nativescript-urlhandler/commit/d810a40))
+
+
+### Features
+
+* **demo-app:** Adding demo app for E2E ([841c991](https://github.com/hypery2k/nativescript-urlhandler/commit/841c991))
+* **to-string:** Use better toString() implementation ([34a151f](https://github.com/hypery2k/nativescript-urlhandler/commit/34a151f))
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/hypery2k/nativescript-urlhandler/compare/v0.1.0...v0.2.0) (2017-03-15)
 
