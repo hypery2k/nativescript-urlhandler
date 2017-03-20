@@ -1,11 +1,13 @@
-.idea
-.vscode
+.idea/
+.vscode/
 .babelrc
 build.xcconfig
 app/
 demo/
 hooks/
 node_modules
+*.yml
+Jenkinsfile
 *.gif
 *.jpg
 *.png
@@ -14,3 +16,4 @@ node_modules
 !*.d.ts
 spec/
 target/
+sampleApp/

@@ -16,6 +16,7 @@
         ]
     },
     "exclude": [
+        "sampleApp",
         "node_modules",
         "bundles"
     ]
