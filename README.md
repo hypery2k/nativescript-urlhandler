@@ -19,7 +19,7 @@
 # Usage
 
 Just add App links to your app, see iOS and Android instructions below, and register a handler for the URL data:
-```
+```javascript
 import { Component } from "@angular/core";
 import { handleOpenURL, AppURL } from 'nativescript-urlhandler';
 
@@ -41,13 +41,13 @@ export class AppComponent {
 
 ## Installation
 
-```
+```bash
 $ tns plugin add nativescript-urlhandler
 ```
 
 Or if you want to use the development version (nightly build), which maybe not stable!:
 
-```
+```bash
 $ tns plugin add nativescript-urlhandler@next
 ```
 
@@ -55,7 +55,7 @@ $ tns plugin add nativescript-urlhandler@next
 ### Android
 
 
-```
+```xml
 <intent-filter>
   <action android:name="android.intent.action.VIEW" /> 
   <category android:name="android.intent.category.DEFAULT" /> 
@@ -66,7 +66,7 @@ $ tns plugin add nativescript-urlhandler@next
 
 For example:
 
-```
+```xml
 <activity android:name="com.MyCompany.MyApp.MainActivity" android:label="@string/app_name">
   <intent-filter>
       <action android:name="android.intent.action.MAIN" />
@@ -84,7 +84,7 @@ For example:
 
 ### iOS
 
-```
+```xml
 <key>CFBundleURLTypes</key>
     <array>
         <dict>
