@@ -1,3 +1,13 @@
+<a name="0.3.1"></a>
+## [0.3.1](https://github.com/hypery2k/nativescript-urlhandler/compare/v0.3.0...v0.3.1) (2017-03-21)
+
+
+### Features
+
+* **trigger-once:** Use last data to check if data has changed ([971d0d9](https://github.com/hypery2k/nativescript-urlhandler/commit/971d0d9))
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/hypery2k/nativescript-urlhandler/compare/v0.2.0...v0.3.0) (2017-03-20)
 
