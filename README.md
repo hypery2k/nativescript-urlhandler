@@ -18,8 +18,10 @@
 
 # Usage
 
-Just add App links to your app, see iOS and Android instructions below, and register a handler for the URL data:
-```javascript
+Just add App links to your app, see iOS and Android instructions below, and register a handler for the URL data.
+
+See this example for Angular:
+```typescript
 import { Component } from "@angular/core";
 import { handleOpenURL, AppURL } from 'nativescript-urlhandler';
 
@@ -34,6 +36,24 @@ export class AppComponent {
       });
     }
 }
+
+```
+And for pure NativeScript:
+```javascript
+var handleOpenURL = require("nativescript-urlhandler").handleOpenURL;
+
+handleOpenURL(function(appURL) {
+console.log('Got the following appURL', appURL);
+});
+
+```
+Or as TypeScript:
+```typescript
+import { handleOpenURL, AppURL } from 'nativescript-urlhandler';
+
+handleOpenURL((appURL: AppURL) => {
+    console.log('Got the following appURL', appURL);
+});
 
 ```
 
