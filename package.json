@@ -1,73 +1,74 @@
 {
-  "name": "nativescript-urlhandler",
-  "version": "0.3.0",
-  "description": "Register custom URLs for your NativeScript app",
-  "scripts": {
-    "preclean": "npm i rimraf",
-    "clean": "rimraf node_modules hooks platforms target '*.js' '*.js.map' 'sampleApp/**/*.js' 'sampleApp/**/*.js.map' sampleApp/platforms sampleApp/node_modules sampleApp/hooks",
-    "postclean": "npm i && cd sampleApp && npm i",
-    "prebuild": "npm run tslint",
-    "build": "npm run tsc",
-    "tsc": "tsc",
-    "tslint": "tslint \"*.ts\"",
-    "test": "npm run tslint && npm run jasmine",
-    "e2e": "npm run preparedemo && cd sampleApp && tns build ios && tns build android",
-    "jasmine": "babel-node spec/run.js",
-    "demo.ios": "npm run preparedemo && cd sampleApp && tns run ios --emulator",
-    "demo.android": "npm run preparedemo && cd sampleApp && tns run android --emulator",
-    "preparedemo": "npm run build && cd sampleApp && tns plugin remove nativescript-urlhandler && tns plugin add .. && tns install",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "changelog:add": "git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md'",
-    "release:pre": "npm run clean && npm run build && npm run test",
-    "release:post": "npm run changelog && npm run changelog:add",
-    "release:major": "npm run release:pre && npm version major && npm run release:post && git push origin && git push origin --tags && npm publish",
-    "release:minor": "npm run release:pre && npm version minor && npm run release:post && git push origin && git push origin --tags && npm publish",
-    "release:patch": "npm run release:pre && npm version patch && npm run release:post && git push origin && git push origin --tags && npm publish"
-  },
-  "main": "urlhandler",
-  "typings": "urlhandler.d.ts",
-  "nativescript": {
-    "platforms": {
-      "android": "2.3.0",
-      "ios": "2.3.0"
-    }
-  },
-  "dependencies": {},
-  "peerDependencies": {
-    "tns-core-modules": "^2.3.1"
-  },
-  "devDependencies": {
-    "@types/jasmine": "2.5.46",
-    "babel-cli": "6.24.0",
-    "babel-core": "6.24.0",
-    "babel-preset-es2015": "6.24.0",
-    "babel-traverse": "6.18.0",
-    "babel-types": "6.18.0",
-    "conventional-changelog-cli": "1.3.1",
-    "jasmine": "2.5.3",
-    "jasmine-core": "2.5.2",
-    "jasmine-reporters": "2.2.1",
-    "mockery": "2.0.0",
-    "nativescript-dev-typescript": "0.3.7",
-    "rimraf": "2.6.1",
-    "tns-core-modules": "2.5.1",
-    "tns-platform-declarations": "2.5.0",
-    "tslint": "4.5.1",
-    "tslint-eslint-rules": "3.5.0",
-    "typescript": "2.2.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hypery2k/nativescript-urlhandler.git"
-  },
-  "keywords": [
-    "NativeScript",
-    "URL-Handler"
-  ],
-  "author": "Martin Reinhardt",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/hypery2k/nativescript-urlhandler/issues"
-  },
-  "homepage": "https://github.com/hypery2k/nativescript-urlhandler"
+    "name": "nativescript-urlhandler",
+    "version": "0.3.0",
+    "description": "Register custom URLs for your NativeScript app",
+    "scripts": {
+        "preclean": "npm i rimraf",
+        "clean": "rimraf node_modules hooks platforms target '*.js' '*.js.map' 'sampleApp/**/*.js' 'sampleApp/**/*.js.map' sampleApp/platforms sampleApp/node_modules sampleApp/hooks",
+        "postclean": "npm i && cd sampleApp && npm i",
+        "prebuild": "npm run tslint",
+        "build": "npm run tsc",
+        "tsc": "tsc",
+        "tslint": "tslint \"*.ts\"",
+        "test": "npm run tslint && npm run jasmine",
+        "e2e": "npm run preparedemo && cd sampleApp && tns build ios && tns build android",
+        "jasmine": "babel-node spec/run.js",
+        "demo.ios": "npm run preparedemo && cd sampleApp && tns run ios --emulator",
+        "demo.android": "npm run preparedemo && cd sampleApp && tns run android --emulator",
+        "preparedemo": "npm run build && cd sampleApp && tns plugin remove nativescript-urlhandler && tns plugin add .. && tns install",
+        "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+        "changelog:add": "git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md'",
+        "release:pre": "npm run clean && npm run build && npm run test",
+        "release:post": "npm run changelog && npm run changelog:add",
+        "release:major": "npm run release:pre && npm version major && npm run release:post && git push origin && git push origin --tags && npm run publish-and-merge",
+        "release:minor": "npm run release:pre && npm version minor && npm run release:post && git push origin && git push origin --tags && npm run publish-and-merge",
+        "release:patch": "npm run release:pre && npm version patch && npm run release:post && git push origin && git push origin --tags && npm run publish-and-merge",
+        "publish-and-merge": "git checkout master && git merge develop && git push && git checkout develop && npm publish"
+    },
+    "main": "urlhandler",
+    "typings": "urlhandler.d.ts",
+    "nativescript": {
+        "platforms": {
+            "android": "2.3.0",
+            "ios": "2.3.0"
+        }
+    },
+    "dependencies": {},
+    "peerDependencies": {
+        "tns-core-modules": "^2.3.1"
+    },
+    "devDependencies": {
+        "@types/jasmine": "2.5.46",
+        "babel-cli": "6.24.0",
+        "babel-core": "6.24.0",
+        "babel-preset-es2015": "6.24.0",
+        "babel-traverse": "6.18.0",
+        "babel-types": "6.18.0",
+        "conventional-changelog-cli": "1.3.1",
+        "jasmine": "2.5.3",
+        "jasmine-core": "2.5.2",
+        "jasmine-reporters": "2.2.1",
+        "mockery": "2.0.0",
+        "nativescript-dev-typescript": "0.3.7",
+        "rimraf": "2.6.1",
+        "tns-core-modules": "2.5.1",
+        "tns-platform-declarations": "2.5.0",
+        "tslint": "4.5.1",
+        "tslint-eslint-rules": "3.5.0",
+        "typescript": "2.2.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/hypery2k/nativescript-urlhandler.git"
+    },
+    "keywords": [
+        "NativeScript",
+        "URL-Handler"
+    ],
+    "author": "Martin Reinhardt",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/hypery2k/nativescript-urlhandler/issues"
+    },
+    "homepage": "https://github.com/hypery2k/nativescript-urlhandler"
 }
