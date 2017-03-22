@@ -1,6 +1,6 @@
 {
   "name": "nativescript-urlhandler",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Register custom URLs for your NativeScript app",
   "scripts": {
     "preclean": "npm i rimraf",
