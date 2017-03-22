@@ -35,7 +35,7 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "tns-core-modules": "^2.3.1"
+    "tns-core-modules": "^2.5.2"
   },
   "devDependencies": {
     "@types/jasmine": "2.5.46",
@@ -52,7 +52,7 @@
     "nativescript-dev-typescript": "0.3.7",
     "rimraf": "2.6.1",
     "tns-core-modules": "2.5.1",
-    "tns-platform-declarations": "2.5.0",
+    "tns-platform-declarations": "2.5.2",
     "tslint": "4.5.1",
     "tslint-eslint-rules": "3.5.0",
     "typescript": "2.2.1"
