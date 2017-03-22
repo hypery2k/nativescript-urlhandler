@@ -1,3 +1,13 @@
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/hypery2k/nativescript-urlhandler/compare/v0.3.1...v0.4.0) (2017-03-22)
+
+
+### Bug Fixes
+
+* **module-error:** Use commonjs module in tsconfig ([a39c61d](https://github.com/hypery2k/nativescript-urlhandler/commit/a39c61d))
+
+
+
 <a name="0.3.1"></a>
 ## [0.3.1](https://github.com/hypery2k/nativescript-urlhandler/compare/v0.3.0...v0.3.1) (2017-03-21)
 
