@@ -9,7 +9,7 @@ var URL_HANDLER_CB: UrlHandlerCallback;
 export function extractAppURL(urlParam: any): AppURL {
     if (!!urlParam) {
         let url = urlParam.toString(),
-            params = new Map<String, String>(),
+            params = new Map<string, string>(),
             urlWithPath = url.indexOf('//') < url.length - 2,
             urlWithParams = url.indexOf('?') !== -1,
             path = urlWithPath ? url.substring(url.indexOf('//') + 2, urlWithParams ? url.indexOf('?') : url.length) : null,
