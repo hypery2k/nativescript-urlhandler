@@ -2,20 +2,29 @@ import mockery from "mockery";
 mockery.enable();
 mockery.warnOnUnregistered(false);
 mockery.registerMock("application", {
-  android: {
-    on: function () {
+    android: {
+        on: function() {
 
+        }
+    },
+    ios: {
+        delegate: {}
+    },
+    AndroidApplication: {
+        activityResumedEvent: {}
     }
-  },
-  ios: {
-    delegate: {}
-  },
-  AndroidApplication: {
-    activityResumedEvent: {}
-  }
 });
+mockery.registerMock("android", {});
 mockery.registerMock("platform", {});
 mockery.registerMock("utils/utils", {});
+mockery.registerMock("ui/frame", {});
 
-global.UIResponder={};
-global.UIApplicationDelegate={}
+global.android = {
+    app: {
+        Activity: {}
+    }
+};
+global.JavaProxy = () => {};
+global.Activity = {};
+global.UIResponder = {};
+global.UIApplicationDelegate = {}
