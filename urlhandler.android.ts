@@ -30,6 +30,8 @@ export class Activity extends android.app.Activity {
         if (!this._callbacks) {
             setActivityCallbacks(this);
         }
+        // initialize the modules with the custom application object
+        application.android.init(this);
         this._callbacks.onCreate(this, savedInstanceState, super.onCreate);
     }
     protected onNewIntent(intent: android.content.Intent): void {
