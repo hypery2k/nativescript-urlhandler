@@ -1,12 +1,12 @@
-
+/// <reference path='node_modules/tns-platform-declarations/android/android.d.ts' />
 import * as application from 'application';
+import { setActivityCallbacks, AndroidActivityCallbacks } from 'ui/frame';
 import { getCallback, extractAppURL } from './urlhandler.common';
 export { handleOpenURL } from './urlhandler.common';
-declare var android: any;
 
 let lastReceivedData = null;
 
-function handleIntent(intent: any) {
+export function handleIntent(intent: any) {
     let data = intent.getData();
     if (data !== lastReceivedData) {
         try {
@@ -22,10 +22,20 @@ function handleIntent(intent: any) {
     }
 }
 
-application.android.on(application.AndroidApplication.activityStartedEvent, (args) => {
-    handleIntent(args.activity.getIntent());
-});
+@JavaProxy('com.tns.NativeScriptActivity')
+export class Activity extends android.app.Activity {
+    private _callbacks: AndroidActivityCallbacks;
 
-application.android.on(application.AndroidApplication.activityResumedEvent, (args) => {
-    handleIntent(args.activity.getIntent());
-});
+    protected onCreate(savedInstanceState: android.os.Bundle): void {
+        if (!this._callbacks) {
+            setActivityCallbacks(this);
+        }
+        this._callbacks.onCreate(this, savedInstanceState, super.onCreate);
+    }
+    protected onNewIntent(intent: android.content.Intent): void {
+        super.onNewIntent(intent);
+        if (intent.getDataString) {
+            handleIntent(intent);
+        }
+    }
+}
