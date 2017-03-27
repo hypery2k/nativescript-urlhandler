@@ -1,10 +1,14 @@
-<a name="0.4.0"></a>
-# [0.4.0](https://github.com/hypery2k/nativescript-urlhandler/compare/v0.3.1...v0.4.0) (2017-03-22)
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/hypery2k/nativescript-urlhandler/compare/v0.3.1...v0.5.0) (2017-03-27)
 
 
 ### Bug Fixes
 
+* **android-error:** Solve android error ([0d50701](https://github.com/hypery2k/nativescript-urlhandler/commit/0d50701))
+* **android-error:** Solve callback never called ([d38b6a0](https://github.com/hypery2k/nativescript-urlhandler/commit/d38b6a0))
+* **init:** initialize the modules with the custom application object ([e99238e](https://github.com/hypery2k/nativescript-urlhandler/commit/e99238e))
 * **module-error:** Use commonjs module in tsconfig ([a39c61d](https://github.com/hypery2k/nativescript-urlhandler/commit/a39c61d))
+* **ts-errors:** Resolve small typescript errors ([ef5aff4](https://github.com/hypery2k/nativescript-urlhandler/commit/ef5aff4))
 
 
 
