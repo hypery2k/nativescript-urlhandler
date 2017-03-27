@@ -70,6 +70,4 @@ src/node_modules
 target/
 
 # sample app
-sampleApp/hooks/
-sampleApp/node_modules/
-sampleApp/platforms/
+test/e2e/node_modules/
