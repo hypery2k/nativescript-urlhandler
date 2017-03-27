@@ -50,7 +50,6 @@
         "jasmine-core": "2.5.2",
         "jasmine-reporters": "2.2.1",
         "mockery": "2.0.0",
-        "nativescript-dev-typescript": "0.3.7",
         "rimraf": "2.6.1",
         "tns-core-modules": "2.5.2",
         "tns-platform-declarations": "2.5.2",
