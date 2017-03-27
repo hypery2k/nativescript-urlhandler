@@ -7,7 +7,7 @@ let lastReceivedData = null;
 
 export function handleIntent(intent: any) {
     let data = intent.getData();
-    if (data !== lastReceivedData) {
+    if (data.toString() !== lastReceivedData.toString()) {
         try {
             if (new String(intent.getAction()).valueOf() === new String(android.content.Intent.ACTION_VIEW).valueOf()) {
                 application.android.on(application.AndroidApplication.activityResultEvent, (eventData) => {
@@ -22,29 +22,24 @@ export function handleIntent(intent: any) {
     }
 }
 application.android.on(application.AndroidApplication.activityCreatedEvent, (args) => {
-    let intent: android.content.Intent = args.activity.getIntent(),
-        data = intent.getData();
-    if (data !== lastReceivedData) {
-        try {
-            if (new String(intent.getAction()).valueOf() === new String(android.content.Intent.ACTION_VIEW).valueOf()) {
-                handleIntent(intent);
-            }
-        } catch (e) {
-            console.error('Unknown error during getting App URL data', e);
+    let intent: android.content.Intent = args.activity.getIntent();
+    try {
+        if (new String(intent.getAction()).valueOf() === new String(android.content.Intent.ACTION_VIEW).valueOf()) {
+            handleIntent(intent);
         }
+    } catch (e) {
+        console.error('Unknown error during getting App URL data', e);
     }
+
 });
 application.android.on(application.AndroidApplication.activityResumedEvent, (args) => {
-    let intent: android.content.Intent = args.activity.getIntent(),
-        data = intent.getData();
-    if (data !== lastReceivedData) {
-        try {
-            if (new String(intent.getAction()).valueOf() === new String(android.content.Intent.ACTION_VIEW).valueOf()) {
-                handleIntent(intent);
-                lastReceivedData = data;
-            }
-        } catch (e) {
-            console.error('Unknown error during getting App URL data', e);
+    let intent: android.content.Intent = args.activity.getIntent();
+    try {
+        if (new String(intent.getAction()).valueOf() === new String(android.content.Intent.ACTION_VIEW).valueOf()) {
+            handleIntent(intent);
+            lastReceivedData = intent.getData();
         }
+    } catch (e) {
+        console.error('Unknown error during getting App URL data', e);
     }
 });
