@@ -22,11 +22,11 @@ node('nativescript') {
         }
 
         stage('Build') {
-            sh "alias npm='node --max_old_space_size=8000 /usr/bin/npm' && npm run clean && npm run build"
+            sh "npm run clean && npm run build"
         }
 
         stage('Test') {
-            sh "alias npm='node --max_old_space_size=8000 /usr/bin/npm' && npm run test"
+            sh "npm run test"
             junit 'target/junit-report/junitresults-*.xml'
         }
 
