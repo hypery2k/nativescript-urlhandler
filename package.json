@@ -5,7 +5,7 @@
     "scripts": {
         "preclean": "npm i rimraf",
         "clean": "rimraf node_modules hooks platforms target '*.js' '*.js.map' 'test/e2e/**/*.js' 'test/e2e/**/*.js.map' test/e2e/platforms test/e2e/node_modules test/e2e/hooks",
-        "postclean": "npm i && cd test/e2e && npm i",
+        "postclean": "npm i",
         "prebuild": "npm run tslint",
         "build": "npm run tsc",
         "tsc": "tsc",
@@ -15,7 +15,7 @@
         "jasmine": "babel-node test/spec/run.js",
         "demo.ios": "npm run preparedemo && cd test/e2e && tns run ios --emulator",
         "demo.android": "npm run preparedemo && cd test/e2e && tns run android --emulator",
-        "preparedemo": "npm run build && cd test/e2e && tns plugin remove nativescript-urlhandler && tns plugin add ../.. && tns install",
+        "preparedemo": "npm run build && cd test/e2e && npm i && tns plugin remove nativescript-urlhandler && tns plugin add ../.. && tns install",
         "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
         "changelog:add": "git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md'",
         "release:pre": "npm run clean && npm run build && npm run test",
