@@ -74,20 +74,22 @@ $ tns plugin add nativescript-urlhandler@next
 
 ### Android
 
-
+Replace *myapp* with your desired scheme and set launchMode to *singleTask*
 ```xml
-<intent-filter>
-  <action android:name="android.intent.action.VIEW" /> 
-  <category android:name="android.intent.category.DEFAULT" /> 
-  <category android:name="android.intent.category.BROWSABLE" /> 
-  <data android:scheme="myapp" /> 
-</intent-filter>
+<activity android:name="com.tns.NativeScriptActivity" ... android:launchMode="singleTask"...>
+        ...
+    <intent-filter>
+    <data android:scheme="myapp" /> 
+    <action android:name="android.intent.action.VIEW" /> 
+    <category android:name="android.intent.category.DEFAULT" /> 
+    <category android:name="android.intent.category.BROWSABLE" /> 
+    </intent-filter>
 ```
 
 For example:
 
 ```xml
-<activity android:name="com.MyCompany.MyApp.MainActivity" android:label="@string/app_name">
+<activity android:name="com.tns.NativeScriptApplication" android:label="@string/app_name" android:launchMode="singleTask">
   <intent-filter>
       <action android:name="android.intent.action.MAIN" />
       <category android:name="android.intent.category.LAUNCHER" />
@@ -101,6 +103,8 @@ For example:
 </activity>
 
 ```
+
+The android:launchMode="singleTask" tells the Android operating system to launch the app with a new instance of the activity, or use an existing one. Without this your app will launch multiple instances of itself which is no good.
 
 ### iOS
 
