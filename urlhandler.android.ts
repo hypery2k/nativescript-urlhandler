@@ -24,7 +24,8 @@ export function handleIntent(intent: any) {
 application.android.on(application.AndroidApplication.activityCreatedEvent, (args) => {
     let intent: android.content.Intent = args.activity.getIntent();
     try {
-        if (new String(intent.getAction()).valueOf() === new String(android.content.Intent.ACTION_VIEW).valueOf()) {
+        if (new String(intent.getAction()).valueOf() === new String(android.content.Intent.ACTION_MAIN).valueOf()
+           || new String(intent.getAction()).valueOf() ===  new String(android.content.Intent.ACTION_VIEW).valueOf()) {
             handleIntent(intent);
         }
     } catch (e) {
@@ -35,7 +36,8 @@ application.android.on(application.AndroidApplication.activityCreatedEvent, (arg
 application.android.on(application.AndroidApplication.activityResumedEvent, (args) => {
     let intent: android.content.Intent = args.activity.getIntent();
     try {
-        if (new String(intent.getAction()).valueOf() === new String(android.content.Intent.ACTION_VIEW).valueOf()) {
+        if (new String(intent.getAction()).valueOf() === new String(android.content.Intent.ACTION_MAIN).valueOf()
+           || new String(intent.getAction()).valueOf() ===  new String(android.content.Intent.ACTION_VIEW).valueOf()) {
             handleIntent(intent);
             lastReceivedData = intent.getData();
         }
