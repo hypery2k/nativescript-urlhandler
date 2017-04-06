@@ -7,7 +7,7 @@ let lastReceivedData = null;
 
 export function handleIntent(intent: any) {
     let data = intent.getData();
-    if (data.toString() !== lastReceivedData.toString()) {
+    if (lastReceivedData === null || data.toString() !== lastReceivedData.toString()) {
         try {
             if (new String(intent.getAction()).valueOf() === new String(android.content.Intent.ACTION_VIEW).valueOf()) {
                 application.android.on(application.AndroidApplication.activityResultEvent, (eventData) => {
