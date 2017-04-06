@@ -7,6 +7,7 @@ env:
   - NODE_VERSION="4" NPM_VERSION="3" TNS_VERSION="rc"
   - NODE_VERSION="5" NPM_VERSION="3" TNS_VERSION="rc"
   - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="rc"
+  - NODE_VERSION="7" NPM_VERSION="3" TNS_VERSION="rc"
 
 script:
   - export ANDROID_HOME=/usr/local/share/android-sdk

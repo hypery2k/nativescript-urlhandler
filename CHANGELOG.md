@@ -1,3 +1,15 @@
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/hypery2k/nativescript-urlhandler/compare/v0.5.1...v1.0.0) (2017-04-06)
+
+
+### Bug Fixes
+
+* **action-error:** Resolve action error on android ([76ceef4](https://github.com/hypery2k/nativescript-urlhandler/commit/76ceef4))
+* **Action-Error:** Solve Android action error ([3ee1f62](https://github.com/hypery2k/nativescript-urlhandler/commit/3ee1f62))
+* **Action-Error:** Solve Android action error ([a6ad692](https://github.com/hypery2k/nativescript-urlhandler/commit/a6ad692))
+
+
+
 <a name="0.5.1"></a>
 ## [0.5.1](https://github.com/hypery2k/nativescript-urlhandler/compare/v0.5.0...v0.5.1) (2017-04-06)
 
