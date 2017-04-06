@@ -3,45 +3,47 @@ properties properties: [
         [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/hypery2k/nativescript-urlhandler'],
 ]
 
-node('nativescript') {
-    def buildNumber = env.BUILD_NUMBER
-    def branchName = env.BRANCH_NAME
-    def workspace = env.WORKSPACE
-    def buildUrl = env.BUILD_URL
+timeout(30) {
+    node('nativescript') {
+        def buildNumber = env.BUILD_NUMBER
+        def branchName = env.BRANCH_NAME
+        def workspace = env.WORKSPACE
+        def buildUrl = env.BUILD_URL
 
-    // PRINT ENVIRONMENT TO JOB
-    echo "workspace directory is $workspace"
-    echo "build URL is $buildUrl"
-    echo "build Number is $buildNumber"
-    echo "branch name is $branchName"
-    echo "PATH is $env.PATH"
+        // PRINT ENVIRONMENT TO JOB
+        echo "workspace directory is $workspace"
+        echo "build URL is $buildUrl"
+        echo "build Number is $buildNumber"
+        echo "branch name is $branchName"
+        echo "PATH is $env.PATH"
 
-    try {
-        stage('Checkout') {
-            checkout scm
+        try {
+            stage('Checkout') {
+                checkout scm
+            }
+
+            stage('Build') {
+                sh "npm run clean && npm run build"
+            }
+
+            stage('Test') {
+                sh "npm run test"
+                junit 'target/junit-report/junitresults-*.xml'
+            }
+
+            stage('End2End Test') {
+                sh "npm run e2e"
+            }
+
+            stage('Publish NPM snapshot') {
+                def currentVersion = sh(returnStdout: true, script: "npm version | grep \"{\" | tr -s ':'  | cut -d \"'\" -f 4").trim()
+                def newVersion = "${currentVersion}-${branchName}-${buildNumber}"
+                sh "npm version ${newVersion} --no-git-tag-version && npm publish --tag next"
+            }
+
+        } catch (e) {
+            mail subject: "${env.JOB_NAME} (${env.BUILD_NUMBER}): Error on build", to: 'github@martinreinhardt-online.de', body: "Please go to ${env.BUILD_URL}."
+            throw e
         }
-
-        stage('Build') {
-            sh "npm run clean && npm run build"
-        }
-
-        stage('Test') {
-            sh "npm run test"
-            junit 'target/junit-report/junitresults-*.xml'
-        }
-
-        stage('End2End Test') {
-            sh "npm run e2e"
-        }
-
-        stage('Publish NPM snapshot') {
-            def currentVersion = sh(returnStdout: true, script: "npm version | grep \"{\" | tr -s ':'  | cut -d \"'\" -f 4").trim()
-            def newVersion = "${currentVersion}-${branchName}-${buildNumber}"
-            sh "npm version ${newVersion} --no-git-tag-version && npm publish --tag next"
-        }
-
-    } catch (e) {
-        mail subject: "${env.JOB_NAME} (${env.BUILD_NUMBER}): Error on build", to: 'github@martinreinhardt-online.de', body: "Please go to ${env.BUILD_URL}."
-        throw e
     }
 }
