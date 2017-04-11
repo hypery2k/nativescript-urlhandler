@@ -9,8 +9,10 @@
         "noEmitOnError": true,
         "skipDefaultLibCheck": true,
         "skipLibCheck": true,
+        "importHelpers": true,
         "lib": [
-            "es2016"
+            "es2015",
+            "es2015.iterable"
         ],
         "types": [
             "jasmine"
