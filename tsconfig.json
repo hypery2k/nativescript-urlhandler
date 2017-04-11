@@ -1,23 +1,25 @@
 {
     "compilerOptions": {
-        "noImplicitAny": false,
-        "module": "commonjs",
         "target": "es5",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
+        "module": "commonjs",
         "declaration": true,
-        "moduleResolution": "node",
-        "noUnusedLocals": true,
-        "types": [
-            "jasmine"
-        ],
+        "removeComments": true,
+        "experimentalDecorators": true,
+        "noEmitHelpers": true,
+        "noEmitOnError": true,
+        "skipDefaultLibCheck": true,
+        "skipLibCheck": true,
         "lib": [
             "es2016"
+        ],
+        "types": [
+            "jasmine"
         ]
     },
+    "compileOnSave": true,
     "exclude": [
-        "test",
         "node_modules",
-        "bundles"
+        "test",
+        "platforms"
     ]
 }
