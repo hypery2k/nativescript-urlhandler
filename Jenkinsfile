@@ -3,7 +3,7 @@ properties properties: [
         [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/hypery2k/nativescript-urlhandler'],
 ]
 
-timeout(30) {
+timeout(60) {
     node('nativescript') {
         def buildNumber = env.BUILD_NUMBER
         def branchName = env.BRANCH_NAME
