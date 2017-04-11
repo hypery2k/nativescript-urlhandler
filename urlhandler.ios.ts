@@ -8,7 +8,7 @@ export class UrlHandlerAppDelegate extends UIResponder implements UIApplicationD
 
     public static ObjCProtocols = [UIApplicationDelegate];
 
-    applicationOpenURLSourceApplicationAnnotation(application: UIApplication, url: NSURL, sourceApplication: string, annotation: any): boolean {
+    applicationOpenURLOptions(application: UIApplication, url: NSURL, options: any): boolean {
         getCallback()(extractAppURL(url.absoluteString));
         return true;
     }
