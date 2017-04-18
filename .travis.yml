@@ -9,12 +9,6 @@ env:
   - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="rc"
   - NODE_VERSION="7" NPM_VERSION="3" TNS_VERSION="rc"
 
-script:
-  - export ANDROID_HOME=/usr/local/share/android-sdk
-  - export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
-  - npm run build
-  - npm run test
-  - npm run e2e
 before_install:
   - export ANDROID_HOME=/usr/local/share/android-sdk
   - export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
@@ -42,7 +36,7 @@ before_install:
   - pod --version
   - pod setup --silent
   - pod repo update --silent
-  # Show environment invo
+  # Show environment info
   - node --version
   - npm --version
   - xcpretty --version
@@ -50,3 +44,14 @@ before_install:
   - xcodebuild -showsdks
   - echo $ANDROID_HOME
   - npm run clean
+
+before_script:
+  - avdmanager create avd --force --name test --abi google_apis/armeabi-v7a --package 'system-images;android-19;google_apis;armeabi-v7a'
+  - emulator -memory 1024 -avd test -no-audio -no-window &
+
+script:
+  - export ANDROID_HOME=/usr/local/share/android-sdk
+  - export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+  - npm run build
+  - npm run test
+  - npm run e2e
