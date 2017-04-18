@@ -4,12 +4,18 @@ sudo: false
 language: objective-c
 
 env:
-  - NODE_VERSION="4" NPM_VERSION="3" TNS_VERSION="rc"
-  - NODE_VERSION="5" NPM_VERSION="3" TNS_VERSION="rc"
-  - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="rc"
-  - NODE_VERSION="7" NPM_VERSION="3" TNS_VERSION="rc"
+  global:
+    - TAG=google_apis # Google APIs by default, alternatively use default
+    - ABI=armeabi-v7a # ARM ABI v7a by default
+  matrix:
+    - NODE_VERSION="4" NPM_VERSION="3" TNS_VERSION="rc"
+    - NODE_VERSION="5" NPM_VERSION="3" TNS_VERSION="rc"
+    - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="rc"
+    - NODE_VERSION="7" NPM_VERSION="3" TNS_VERSION="rc"
 
 before_install:
+  - export EMULATOR="system-images;android-${API};${TAG};${ABI}" # Used to install/create emulator
+  - echo 'count=0' > /home/travis/.android/repositories.cfg # Avoid warning
   - export ANDROID_HOME=/usr/local/share/android-sdk
   - export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
   - wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
@@ -31,6 +37,7 @@ before_install:
   - echo y | sdkmanager 'system-images;android-22;default;armeabi-v7a'
   - echo y | sdkmanager 'system-images;android-21;default;armeabi-v7a'
   - echo y | sdkmanager 'system-images;android-19;default;armeabi-v7a'
+  - echo y | sdkmanager 'system-images;android-19;google_apis;armeabi-v7a'
   # Extras
   - echo y | sdkmanager 'extras;android;m2repository'
   - echo y | sdkmanager 'extras;google;google_play_services'
@@ -59,7 +66,7 @@ before_install:
   - npm run clean
 
 before_script:
-  - avdmanager create avd --force --name test --abi google_apis/armeabi-v7a --package 'system-images;android-19;default;armeabi-v7a'
+  - avdmanager create avd --force --name test -k "$EMULATOR" -f --abi "$ABI" --tag "$TAG"
   - emulator -memory 1024 -avd test -no-audio -no-window &
 
 script:
