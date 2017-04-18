@@ -59,7 +59,7 @@ before_install:
   - npm run clean
 
 before_script:
-  - avdmanager create avd --force --name test --abi google_apis/armeabi-v7a --package 'system-images;android-19;google_apis;armeabi-v7a'
+  - avdmanager create avd --force --name test --abi google_apis/armeabi-v7a --package 'system-images;android-19;default;armeabi-v7a'
   - emulator -memory 1024 -avd test -no-audio -no-window &
 
 script:
