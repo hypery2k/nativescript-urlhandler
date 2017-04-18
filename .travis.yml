@@ -17,13 +17,26 @@ before_install:
   - PATH="`npm bin`:`npm bin -g`:$PATH"
   - brew update > /dev/null;
   - brew install Caskroom/cask/android-sdk
+  # Tools
   - echo y | sdkmanager 'tools'
+  # Platform tools
   - echo y | sdkmanager 'platform-tools'
-  - echo y | sdkmanager 'build-tools;25.0.2'
+  # SDKs
   - echo y | sdkmanager 'platforms;android-25'
+  # build tools
+  - echo y | sdkmanager 'build-tools;25.0.2'
+  # Android System Images, for emulators
+  - echo y | sdkmanager 'system-images;android-24;default;armeabi-v7a'
+  - echo y | sdkmanager 'system-images;android-24;default;armeabi-v7a'
+  - echo y | sdkmanager 'system-images;android-22;default;armeabi-v7a'
+  - echo y | sdkmanager 'system-images;android-21;default;armeabi-v7a'
+  - echo y | sdkmanager 'system-images;android-19;default;armeabi-v7a'
+  # Extras
   - echo y | sdkmanager 'extras;android;m2repository'
   - echo y | sdkmanager 'extras;google;google_play_services'
   - echo y | sdkmanager 'extras;google;m2repository'
+  # google apis
+  - echo y | sdkmanager 'add-ons;addon-google_apis-google-23'
   - mkdir "$ANDROID_HOME/licenses" || true
   - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
   - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license" 
