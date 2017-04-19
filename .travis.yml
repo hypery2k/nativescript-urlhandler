@@ -1,10 +1,11 @@
 os: osx
-osx_image: xcode8
+osx_image: xcode8.3
 sudo: false
 language: objective-c
 
 env:
   global:
+    - API=19 # Google API 19 by default
     - TAG=google_apis # Google APIs by default, alternatively use default
     - ABI=armeabi-v7a # ARM ABI v7a by default
   matrix:
@@ -15,7 +16,6 @@ env:
 
 before_install:
   - export EMULATOR="system-images;android-${API};${TAG};${ABI}" # Used to install/create emulator
-  - echo 'count=0' > /home/travis/.android/repositories.cfg # Avoid warning
   - export ANDROID_HOME=/usr/local/share/android-sdk
   - export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
   - wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
@@ -33,7 +33,6 @@ before_install:
   - echo y | sdkmanager 'build-tools;25.0.2'
   # Android System Images, for emulators
   - echo y | sdkmanager 'system-images;android-24;default;armeabi-v7a'
-  - echo y | sdkmanager 'system-images;android-24;default;armeabi-v7a'
   - echo y | sdkmanager 'system-images;android-22;default;armeabi-v7a'
   - echo y | sdkmanager 'system-images;android-21;default;armeabi-v7a'
   - echo y | sdkmanager 'system-images;android-19;default;armeabi-v7a'
@@ -47,15 +46,15 @@ before_install:
   - mkdir "$ANDROID_HOME/licenses" || true
   - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
   - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license" 
-  - npm install -g npm@$NPM_VERSION
-  - npm install -g nativescript@$TNS_VERSION
-  - npm install
   # CocoaPods
   - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
   - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
   - pod --version
   - pod setup --silent
   - pod repo update --silent
+  # Build Tools
+  - npm install -g npm@$NPM_VERSION
+  - npm install -g nativescript@$TNS_VERSION
   # Show environment info
   - node --version
   - npm --version
@@ -63,15 +62,13 @@ before_install:
   - xcodebuild -version
   - xcodebuild -showsdks
   - echo $ANDROID_HOME
-  - npm run clean
 
 before_script:
-  - avdmanager create avd --force --name test -k "$EMULATOR" -f --abi "$ABI" --tag "$TAG"
+  - echo no | avdmanager create avd --name test -k "$EMULATOR" -f --abi "$ABI" --tag "$TAG"
   - emulator -memory 1024 -avd test -no-audio -no-window &
 
 script:
-  - export ANDROID_HOME=/usr/local/share/android-sdk
-  - export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+  - npm run clean
   - npm run build
   - npm run test
   - npm run e2e
