@@ -1,5 +1,3 @@
-/// <reference path='node_modules/tns-platform-declarations/ios/ios.d.ts' />
-
 import * as application from 'application';
 import { getCallback, extractAppURL } from './urlhandler.common';
 export { handleOpenURL } from './urlhandler.common';
