@@ -9,8 +9,8 @@ env:
     - TAG=google_apis # Google APIs by default, alternatively use default
     - ABI=armeabi-v7a # ARM ABI v7a by default
   matrix:
-    - NODE_VERSION="4" NPM_VERSION="3" TNS_VERSION="rc"
-    - NODE_VERSION="5" NPM_VERSION="3" TNS_VERSION="rc"
+    - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="2.5.4"
+    - NODE_VERSION="7" NPM_VERSION="3" TNS_VERSION="2.5.4"
     - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="rc"
     - NODE_VERSION="7" NPM_VERSION="3" TNS_VERSION="rc"
 
