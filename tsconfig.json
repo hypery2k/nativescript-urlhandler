@@ -9,7 +9,7 @@
         "noEmitOnError": true,
         "skipDefaultLibCheck": true,
         "skipLibCheck": true,
-        "importHelpers": true,
+        "importHelpers": false,
         "lib": [
             "es2015",
             "es2015.iterable",
