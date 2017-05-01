@@ -9,14 +9,23 @@
         "noEmitOnError": true,
         "skipDefaultLibCheck": true,
         "skipLibCheck": true,
-        "importHelpers": true,
+        "importHelpers": false,
         "lib": [
             "es2015",
-            "es2015.iterable"
+            "es2015.iterable",
+            "es6",
+            "dom"
         ],
         "types": [
             "jasmine"
-        ]
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "*": [
+                "./node_modules/tns-core-modules/*",
+                "./node_modules/*"
+            ]
+        }
     },
     "compileOnSave": true,
     "exclude": [

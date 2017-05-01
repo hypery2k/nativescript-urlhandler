@@ -1,4 +1,4 @@
-/// <reference path='node_modules/tns-platform-declarations/android/android.d.ts' />
+
 import * as application from 'application';
 import { getCallback, extractAppURL } from './urlhandler.common';
 export { handleOpenURL } from './urlhandler.common';
