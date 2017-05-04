@@ -54,8 +54,8 @@
     "tns-core-modules": "^3.0.0 || ^3.0.0-rc.1",
     "tns-platform-declarations": "^3.0.0 || ^3.0.0-rc.1",
     "tslib": "1.5.0",
-    "tslint": "4.5.1",
-    "tslint-eslint-rules": "3.5.0",
+    "tslint": "5.2.0",
+    "tslint-eslint-rules": "4.0.0",
     "typescript": "^2.2.2"
   },
   "repository": {
