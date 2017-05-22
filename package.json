@@ -30,13 +30,13 @@
   "typings": "urlhandler.d.ts",
   "nativescript": {
     "platforms": {
-      "android": "3.0.0",
-      "ios": "3.0.0"
+      "ios": "2.3.0",
+      "android": "2.3.0"
     }
   },
   "dependencies": {},
   "peerDependencies": {
-    "tns-core-modules": "^3.0.0 || ^3.0.0-rc.1"
+    "tns-core-modules": ">=2.3.0 || >= 3.0.0"
   },
   "devDependencies": {
     "@types/jasmine": "2.5.46",
