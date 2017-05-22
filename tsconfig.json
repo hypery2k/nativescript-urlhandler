@@ -3,18 +3,25 @@
         "target": "es5",
         "module": "commonjs",
         "declaration": true,
+        "sourceMap": true,
+        "pretty": true,
         "removeComments": true,
         "experimentalDecorators": true,
         "noEmitHelpers": false,
         "noEmitOnError": true,
         "skipDefaultLibCheck": true,
         "skipLibCheck": true,
+        "noLib": false,
         "importHelpers": false,
+        "noImplicitAny": false,
+        "noImplicitReturns": true,
+        "noImplicitUseStrict": false,
+        "noFallthroughCasesInSwitch": true,
         "lib": [
+            "dom",
+            "es5",
             "es2015",
-            "es2015.iterable",
-            "es6",
-            "dom"
+            "es2015.iterable"
         ],
         "types": [
             "jasmine"
