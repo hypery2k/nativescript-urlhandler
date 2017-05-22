@@ -1,3 +1,21 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/hypery2k/nativescript-urlhandler/compare/v1.0.0...v1.1.0) (2017-05-22)
+
+
+### Bug Fixes
+
+* **extends-error:** Use tslib ([9d31e63](https://github.com/hypery2k/nativescript-urlhandler/commit/9d31e63))
+* **ios:** Disable importHelpers in tsconfig of the plugin ([25d6c74](https://github.com/hypery2k/nativescript-urlhandler/commit/25d6c74))
+* **iOS:** Changed delegate method ([30d3864](https://github.com/hypery2k/nativescript-urlhandler/commit/30d3864))
+* **tests:** Resolve test errors ([db5701a](https://github.com/hypery2k/nativescript-urlhandler/commit/db5701a))
+
+
+### Features
+
+* **NativeScript 3:** Update to recent NativeScript ([91bf433](https://github.com/hypery2k/nativescript-urlhandler/commit/91bf433))
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/hypery2k/nativescript-urlhandler/compare/v0.5.1...v1.0.0) (2017-04-06)
 
