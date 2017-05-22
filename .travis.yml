@@ -11,8 +11,8 @@ env:
   matrix:
     - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="2.5.4"
     - NODE_VERSION="7" NPM_VERSION="3" TNS_VERSION="2.5.4"
-    - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="rc"
-    - NODE_VERSION="7" NPM_VERSION="3" TNS_VERSION="rc"
+    - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="3.0.0"
+    - NODE_VERSION="7" NPM_VERSION="3" TNS_VERSION="3.0.0"
 
 before_install:
   - export EMULATOR="system-images;android-${API};${TAG};${ABI}" # Used to install/create emulator
