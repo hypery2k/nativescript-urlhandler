@@ -17,7 +17,7 @@
     "demo.android": "npm run preparedemo && cd test/e2e && tns run android --emulator",
     "preparedemo": "npm run build && cd test/e2e && npm i && tns plugin remove nativescript-urlhandler && tns plugin add ../.. && tns install",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "changelog:add": "git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md'",
+    "changelog:add": "git add CHANGELOG.md && git commit -m 'chore(changelog): Updated CHANGELOG.md'",
     "release:pre": "npm run clean && npm run build && npm run test",
     "release:post": "npm run changelog && npm run changelog:add",
     "release:major": "npm run release:pre && npm version major && npm run release:post && git push origin && git push origin --tags && npm run version-and-push",
