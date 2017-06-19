@@ -7,7 +7,7 @@
         "pretty": true,
         "removeComments": true,
         "experimentalDecorators": true,
-        "noEmitHelpers": true,
+        "noEmitHelpers": false,
         "noEmitOnError": true,
         "skipDefaultLibCheck": true,
         "skipLibCheck": true,
