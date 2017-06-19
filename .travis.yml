@@ -58,6 +58,8 @@ before_install:
   # Build Tools
   - npm install -g npm@$NPM_VERSION
   - npm install -g nativescript@$TNS_VERSION
+  - tns usage-reporting disable
+  - tns error-reporting disable
   # Show environment info
   - node --version
   - npm --version
