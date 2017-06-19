@@ -123,3 +123,39 @@ The android:launchMode="singleTask" tells the Android operating system to launch
         </dict>
     </array>
 ```
+
+# FAQ
+
+## Webpack
+
+### TypeScript Config
+
+If your Webpack Build is failing, try adapting your tsconfig to this:
+
+```
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "noEmitHelpers": true,
+        "noEmitOnError": true,
+        "lib": [
+            "es6",
+            "dom",
+            "es2015.iterable"
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "*": [
+                "./node_modules/tns-core-modules/*",
+                "./node_modules/*"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "platforms",
+        "**/*.aot.ts"
+    ]
+```
