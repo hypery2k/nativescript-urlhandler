@@ -46,7 +46,7 @@
     "jasmine": "2.6.0",
     "jasmine-core": "2.6.2",
     "jasmine-reporters": "2.2.1",
-    "mockery": "2.0.0",
+    "mockery": "2.1.0",
     "rimraf": "2.6.1",
     "tns-core-modules": "3.0.1",
     "tns-platform-declarations": "3.0.1",
