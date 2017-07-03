@@ -110,18 +110,18 @@ The android:launchMode="singleTask" tells the Android operating system to launch
 
 ```xml
 <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLName</key>
-            <string>com.yourcompany.myapp</string>
-        </dict>
-        <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>myapp</string>
-            </array>
-        </dict>
-    </array>
+<array>
+    <dict>
+        <key>CFBundleURLName</key>
+        <string>com.yourcompany.myapp</string>
+    </dict>
+    <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>myapp</string>
+        </array>
+    </dict>
+</array>
 ```
 
 # FAQ
