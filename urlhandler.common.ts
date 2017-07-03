@@ -36,5 +36,10 @@ export function handleOpenURL(handler: UrlHandlerCallback): void {
 }
 
 export function getCallback(): UrlHandlerCallback {
+    if (!URL_HANDLER_CB) {
+        URL_HANDLER_CB = function () {
+            console.error('No callback provided. Please ensure that you called "handleOpenURL" during application init!');
+        };
+    }
     return URL_HANDLER_CB;
 }

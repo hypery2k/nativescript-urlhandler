@@ -126,6 +126,14 @@ The android:launchMode="singleTask" tells the Android operating system to launch
 
 # FAQ
 
+## Callback handling
+
+The "handleOpenURL" callback must be called before application initialization, otherwise you'll see this error in the console:
+
+```
+    No callback provided. Please ensure that you called "handleOpenURL" during application init!
+``` 
+
 ## Webpack
 
 ### TypeScript Config
