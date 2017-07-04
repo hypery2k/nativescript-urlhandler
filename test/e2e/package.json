@@ -6,10 +6,10 @@
   "nativescript": {
     "id": "org.nativescript.sampleApp",
     "tns-ios": {
-      "version": "3.0.1"
+      "version": "3.1.0"
     },
     "tns-android": {
-      "version": "3.0.1"
+      "version": "3.1.0"
     }
   },
   "dependencies": {
@@ -36,7 +36,7 @@
     "lazy": "1.0.11",
     "nativescript-dev-android-snapshot": "^0.*.*",
     "nativescript-dev-typescript": "^0.4.2",
-    "tns-core-modules": "3.0.1",
+    "tns-core-modules": "3.1.0",
     "typescript": "2.2.2"
   }
 }
