@@ -1,3 +1,14 @@
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/hypery2k/nativescript-urlhandler/compare/v1.1.0...v1.1.1) (2017-07-04)
+
+
+### Features
+
+* **error-handling:** Improve config error handling ([bebb7c8](https://github.com/hypery2k/nativescript-urlhandler/commit/bebb7c8))
+* **error-handling:** Improve config error handling ([32f96ff](https://github.com/hypery2k/nativescript-urlhandler/commit/32f96ff))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/hypery2k/nativescript-urlhandler/compare/v1.0.0...v1.1.0) (2017-05-22)
 
