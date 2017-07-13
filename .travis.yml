@@ -9,15 +9,15 @@ env:
     - TAG=google_apis # Google APIs by default, alternatively use default
     - ABI=armeabi-v7a # ARM ABI v7a by default
   matrix:
-    - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="2.5.4"
-    - NODE_VERSION="7" NPM_VERSION="3" TNS_VERSION="2.5.4"
-    - NODE_VERSION="7" NPM_VERSION="4" TNS_VERSION="2.5.4"
+    - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="2.5.5"
+    - NODE_VERSION="7" NPM_VERSION="3" TNS_VERSION="2.5.5"
+    - NODE_VERSION="7" NPM_VERSION="4" TNS_VERSION="2.5.5"
+    - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="3.0.3"
+    - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="3.0.3"
+    - NODE_VERSION="7" NPM_VERSION="4" TNS_VERSION="3.0.3"
     - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="3"
-    - NODE_VERSION="7" NPM_VERSION="3" TNS_VERSION="3"
+    - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="3"
     - NODE_VERSION="7" NPM_VERSION="4" TNS_VERSION="3"
-    - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="3.1.1"
-    - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="3.1.1"
-    - NODE_VERSION="7" NPM_VERSION="4" TNS_VERSION="3.1.1"
 
 before_install:
   - export EMULATOR="system-images;android-${API};${TAG};${ABI}" # Used to install/create emulator
@@ -50,10 +50,10 @@ before_install:
   - echo y | sdkmanager 'add-ons;addon-google_apis-google-23'
   - mkdir "$ANDROID_HOME/licenses" || true
   - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
-  - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license" 
+  - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
   # create and start emulator
   - echo no | avdmanager create avd --name test -k "$EMULATOR" -f --abi "$ABI" --tag "$TAG"
-  - emulator -avd test -gpu off -skin 768x1280 -no-audio -no-window &
+  - emulator -avd test -gpu off -skin 768x1280 -no-window &
   # CocoaPods
   - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
   - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
