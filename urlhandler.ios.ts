@@ -6,6 +6,15 @@ export class UrlHandlerAppDelegate extends UIResponder implements UIApplicationD
 
     public static ObjCProtocols = [UIApplicationDelegate];
 
+    applicationDidFinishLaunchingWithOptions(application: UIApplication, launchOptions: NSDictionary<any, any>) {
+        let urlOptions: string = launchOptions.valueForKey('UIApplicationLaunchOptionsURLKey');
+        if (urlOptions) {
+            getCallback()(extractAppURL(urlOptions));
+        }
+        return true;
+    }
+
+
     applicationOpenURLOptions(application: UIApplication, url: NSURL, options: any): boolean {
         getCallback()(extractAppURL(url.absoluteString));
         return true;
