@@ -37,7 +37,7 @@ timeout(60) {
             }
 
             stage('Publish NPM snapshot') {
-                def currentVersion = sh(returnStdout: true, script: "npm version | grep \"{\" | tr -s ':' | tr '_' '-' | cut -d \"'\" -f 4").trim()
+                def currentVersion = sh(returnStdout: true, script: "npm version | grep \"{\" | tr -s ':' | tr '_' '-' | tr '/' '-' | cut -d \"'\" -f 4").trim()
                 def newVersion = sh(returnStdout: true, script: "echo ${currentVersion}-${branchName}-${buildNumber} | tr '_' '-'").trim()
                 sh "npm version ${newVersion} --no-git-tag-version && npm publish --tag next"
             }
