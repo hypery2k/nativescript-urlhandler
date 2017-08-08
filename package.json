@@ -49,7 +49,7 @@
     "mockery": "2.1.0",
     "rimraf": "2.6.1",
     "tns-core-modules": "3.1.0",
-    "tns-platform-declarations": "3.1.0",
+    "tns-platform-declarations": "3.1.1",
     "tslib": "1.7.0",
     "tslint": "5.4.3",
     "tslint-eslint-rules": "4.1.0",
