@@ -1,8 +1,10 @@
 properties properties: [
         [$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '30', numToKeepStr: '10']],
-        [$class: 'GithubProjectProperty', displayName: '', projectUrlStr: 'https://github.com/hypery2k/nativescript-urlhandler'],
         disableConcurrentBuilds()
 ]
+
+@Library('mare-build-library')
+def nodeJS = new de.mare.ci.jenkins.NodeJS()
 
 timeout(60) {
     node('nativescript') {
@@ -23,23 +25,24 @@ timeout(60) {
                 checkout scm
             }
 
-            stage('Build') {
-                sh "npm run clean && npm run build"
-            }
+            dir('src') {
+                stage('Build') {
+                    sh "npm run clean && npm run build"
+                }
 
-            stage('Test') {
-                sh "npm run test"
-                junit 'target/junit-report/junitresults-*.xml'
+                stage('Test') {
+                    sh "npm run test"
+                    junit 'target/junit-report/junitresults-*.xml'
+                }
             }
 
             stage('End2End Test') {
-                sh "npm run e2e"
+                sh "cd demo && npm run build.plugin && npm i && npm run build-ios-bundle && npm run build-android-bundle"
+                sh "cd demo-angular && npm run build.plugin && npm i && npm run build-ios-bundle && npm run build-android-bundle"
             }
 
             stage('Publish NPM snapshot') {
-                def currentVersion = sh(returnStdout: true, script: "npm version | grep \"{\" | tr -s ':' | tr '_' '-' | tr '/' '-' | cut -d \"'\" -f 4").trim()
-                def newVersion = sh(returnStdout: true, script: "echo ${currentVersion}-${branchName}-${buildNumber} | tr '_' '-'").trim()
-                sh "npm version ${newVersion} --no-git-tag-version && npm publish --tag next"
+                nodeJS.publishSnapshot('src', buildNumber, branchName)
             }
 
         } catch (e) {

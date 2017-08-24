@@ -1,80 +1,98 @@
-os: osx
-osx_image: xcode8.3
-sudo: false
-language: objective-c
-
 env:
   global:
-    - API=19 # Google API 19 by default
-    - TAG=google_apis # Google APIs by default, alternatively use default
-    - ABI=armeabi-v7a # ARM ABI v7a by default
-  matrix:
-    - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="2.5.5"
-    - NODE_VERSION="7" NPM_VERSION="3" TNS_VERSION="2.5.5"
-    - NODE_VERSION="7" NPM_VERSION="4" TNS_VERSION="2.5.5"
-    - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="3.0.3"
-    - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="3.0.3"
-    - NODE_VERSION="7" NPM_VERSION="4" TNS_VERSION="3.0.3"
-    - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="3"
-    - NODE_VERSION="6" NPM_VERSION="3" TNS_VERSION="3"
-    - NODE_VERSION="7" NPM_VERSION="4" TNS_VERSION="3"
+    - ANDROID_PACKAGE='demo-debug.apk'
+    - ANDROID_PACKAGE_FOLDER=$TRAVIS_BUILD_DIR/demo/platforms/android/build/outputs/apk
+    - ANDROID_SAUCE_STORAGE="https://saucelabs.com/rest/v1/storage/$SAUCE_USER/$ANDROID_PACKAGE?overwrite=true"
+    - IOS_PACKAGE='demo.zip'
+    - IOS_PACKAGE_FOLDER=$TRAVIS_BUILD_DIR/demo/platforms/ios/build/emulator
+    - IOS_SAUCE_STORAGE="https://saucelabs.com/rest/v1/storage/$SAUCE_USER/$IOS_PACKAGE?overwrite=true"
 
-before_install:
-  - export EMULATOR="system-images;android-${API};${TAG};${ABI}" # Used to install/create emulator
-  - export ANDROID_HOME=/usr/local/share/android-sdk
-  - export PATH=$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH
-  - wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
-  - source ~/.nvm/nvm.sh && nvm install $NODE_VERSION && nvm use $NODE_VERSION
-  - PATH="`npm bin`:`npm bin -g`:$PATH"
-  - brew update > /dev/null;
-  - brew install Caskroom/cask/android-sdk
-  # Tools
-  - echo y | sdkmanager 'tools'
-  # Platform tools
-  - echo y | sdkmanager 'platform-tools'
-  # SDKs
-  - echo y | sdkmanager 'platforms;android-25'
-  # build tools
-  - echo y | sdkmanager 'build-tools;25.0.2'
-  # Android System Images, for emulators
-  - echo y | sdkmanager 'system-images;android-24;default;armeabi-v7a'
-  - echo y | sdkmanager 'system-images;android-22;default;armeabi-v7a'
-  - echo y | sdkmanager 'system-images;android-21;default;armeabi-v7a'
-  - echo y | sdkmanager 'system-images;android-19;default;armeabi-v7a'
-  - echo y | sdkmanager 'system-images;android-19;google_apis;armeabi-v7a'
-  # Extras
-  - echo y | sdkmanager 'extras;android;m2repository'
-  - echo y | sdkmanager 'extras;google;google_play_services'
-  - echo y | sdkmanager 'extras;google;m2repository'
-  # google apis
-  - echo y | sdkmanager 'add-ons;addon-google_apis-google-23'
-  - mkdir "$ANDROID_HOME/licenses" || true
-  - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
-  - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
-  # create and start emulator
-  - echo no | avdmanager create avd --name test -k "$EMULATOR" -f --abi "$ABI" --tag "$TAG"
-  - emulator -avd test -gpu off -skin 768x1280 -no-window &
-  # CocoaPods
-  - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
-  - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
-  - pod --version
-  - pod setup --silent
-  - pod repo update --silent
-  # Build Tools
-  - npm install -g npm@$NPM_VERSION
-  - npm install -g nativescript@$TNS_VERSION
-  - tns usage-reporting disable
-  - tns error-reporting disable
-  # Show environment info
-  - node --version
-  - npm --version
-  - xcpretty --version
-  - xcodebuild -version
-  - xcodebuild -showsdks
-  - echo $ANDROID_HOME
+matrix:
+  include:
+    - stage: "Lint"
+      language: node_js
+      os: linux
+      node_js: "6"
+      script: cd src && npm run ci.tslint && cd ../demo && npm run ci.tslint && cd ../demo-angular && npm run ci.tslint
+    - stage: "WebPack"
+      os: osx
+      env:
+        - Webpack="iOS"
+      osx_image: xcode8.3
+      language: node_js 
+      node_js: "6"
+      jdk: oraclejdk8
+      before_install: cd src && npm i && cd ..
+      script: cd demo && npm run build.plugin && npm i && npm run build-ios-bundle && cd ../demo-angular && npm run build.plugin && npm i && npm run build-ios-bundle
+    - language: android
+      os: linux
+      env:
+        - Webpack="Android"
+      jdk: oraclejdk8
+      before_install: nvm install 6.10.3 && cd src && npm i && cd ..
+      script: cd demo && npm run build.plugin && npm i && npm run build-android-bundle && cd ../demo-angular && npm run build.plugin && npm i && npm run build-android-bundle
+    - stage: "Build"
+      env: 
+        - BuildAndroid="25"
+      language: android
+      os: linux
+      jdk: oraclejdk8
+      before_install: nvm install 6.10.3 && cd src && npm i && cd ..
+      script:
+        - cd demo && npm run ci.android.build && cd ../demo-angular && npm run ci.android.build
+        - "curl -u $SAUCE_USER:$SAUCE_KEY -X POST -H 'Content-Type: application/octet-stream' $ANDROID_SAUCE_STORAGE --data-binary @$ANDROID_PACKAGE_FOLDER/$ANDROID_PACKAGE"
+    - os: osx
+      env: 
+        - BuildiOS="10.3"
+        - Xcode="8.3"
+      osx_image: xcode8.3
+      language: node_js 
+      node_js: "6"
+      jdk: oraclejdk8
+      before_install: cd src && npm i && cd ..
+      script: 
+        - cd demo && npm run ci.ios.build && cd ../demo-angular && npm run ci.ios.build
+        - cd $IOS_PACKAGE_FOLDER && zip -r $IOS_PACKAGE demo.app
+        - "curl -u $SAUCE_USER:$SAUCE_KEY -X POST -H 'Content-Type: application/octet-stream' $IOS_SAUCE_STORAGE --data-binary @$IOS_PACKAGE_FOLDER/$IOS_PACKAGE"
+    - stage: "UI Tests"
+      env: 
+      - Android="23"
+      language: node_js
+      os: linux
+      node_js: "6"
+      before_install: cd src && npm i && cd ..
+      script:
+        - npm i -g appium
+        - cd demo && npm i && npm run appium --runType=android23 --sauceLab=true --appLocation=$ANDROID_PACKAGE
+    - os: linux
+      env: 
+        - iOS="10"
+      language: node_js 
+      node_js: "6"
+      before_install: cd src && npm i && cd ..
+      script: 
+        - npm i -g appium
+        - cd demo && npm i
+        - travis_wait npm run appium --runType=ios-simulator103iPhone6 --sauceLab=true --appLocation=$IOS_PACKAGE
 
-script:
-  - npm run clean
-  - npm run build
-  - npm run test
-  - npm run e2e
+android:
+  components:
+    - tools
+    - platform-tools
+    - build-tools-25.0.2
+    - android-25
+    - extra-android-m2repository
+
+before_cache:
+    - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+
+cache:
+    directories:
+        - .nvm
+        - $HOME/.gradle/caches/
+        - $HOME/.gradle/wrapper/
+
+install:
+    - npm install -g nativescript
+    - tns usage-reporting disable
+    - tns error-reporting disable

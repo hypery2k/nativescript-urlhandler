@@ -1,4 +1,4 @@
-# NativeScript URL Handler Plugin
+# NativeScript URL Handler Plugin  ![apple](https://cdn3.iconfinder.com/data/icons/picons-social/57/16-apple-32.png) ![android](https://cdn4.iconfinder.com/data/icons/logos-3/228/android-32.png)
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/hypery2k/nativescript-urlhandler.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/hypery2k/nativescript-urlhandler.svg?branch=master)](https://travis-ci.org/hypery2k/nativescript-urlhandler)

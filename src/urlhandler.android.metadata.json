@@ -1,0 +1,1 @@
+[{"__symbolic":"module","version":3,"metadata":{"handleIntent":{"__symbolic":"function"}},"exports":[{"from":"./urlhandler.common","export":["handleOpenURL"]}]},{"__symbolic":"module","version":1,"metadata":{"handleIntent":{"__symbolic":"function"}},"exports":[{"from":"./urlhandler.common","export":["handleOpenURL"]}]}]
