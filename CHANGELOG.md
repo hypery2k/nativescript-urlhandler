@@ -1,3 +1,18 @@
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/hypery2k/nativescript-urlhandler/compare/v1.1.1...v1.2.0) (2017-08-24)
+
+
+### Bug Fixes
+
+* **iOS-cold-start:** Let app handle URL when launched fresh ([504f701](https://github.com/hypery2k/nativescript-urlhandler/commit/504f701))
+
+
+### Features
+
+* **ensure-plugin-quality:** Harmonize to NativeScript plugin guidelines ([87b9d3d](https://github.com/hypery2k/nativescript-urlhandler/commit/87b9d3d))
+
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/hypery2k/nativescript-urlhandler/compare/v1.1.0...v1.1.1) (2017-07-04)
 
