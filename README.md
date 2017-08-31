@@ -22,7 +22,7 @@ Just add App links to your app, see iOS and Android instructions below, and regi
 
 See this example for Angular:
 ```typescript
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { handleOpenURL, AppURL } from 'nativescript-urlhandler';
 
 @Component({
@@ -31,10 +31,13 @@ import { handleOpenURL, AppURL } from 'nativescript-urlhandler';
 })
 export class AppComponent {
     constructor() {
-      handleOpenURL((appURL: AppURL) => {
-        console.log('Got the following appURL', appURL);
-      });
-    }
+    } 
+    
+    ngOnInit(){
+        handleOpenURL((appURL: AppURL) => {
+            console.log('Got the following appURL', appURL);
+        });
+     }
 }
 
 ```
