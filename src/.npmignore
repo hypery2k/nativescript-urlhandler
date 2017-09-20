@@ -4,7 +4,6 @@
 build.xcconfig
 app/
 demo/
-hooks/
 node_modules
 *.yml
 Jenkinsfile
