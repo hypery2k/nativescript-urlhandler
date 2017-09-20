@@ -8,11 +8,11 @@ import { handleOpenURL, AppURL } from 'nativescript-urlhandler';
 
 export class AppComponent implements OnInit {
     constructor() {
-    } 
-    
-    ngOnInit(){
+    }
+
+    ngOnInit() {
         handleOpenURL((appURL: AppURL) => {
             console.log('Got the following appURL', appURL);
         });
-     }
+    }
 }
