@@ -27,7 +27,7 @@
     "release:minor": "npm run release:pre && npm version minor && npm run release:post",
     "release:patch": "npm run release:pre && npm version patch && npm run release:post",
     "version-and-push": "git push origin && git push origin --tags && npm run publish-and-merge",
-    "publish-and-merge": "git checkout master && git merge develop && git push && git checkout develop && npm publish"
+    "publish-and-merge": "git checkout master && git merge develop && npm publish && git push && git checkout develop"
   },
   "main": "urlhandler",
   "typings": "index.d.ts",
