@@ -28,8 +28,8 @@
     "release:patch": "npm run release:pre && npm version patch && npm run release:post",
     "version-and-push": "git push origin && git push origin --tags && npm run merge-and-publish",
     "merge-and-publish:pre":"git checkout master && git merge develop",
-    "merge-and-publish": "cd src && mv ../README.md .&& mv ../LICENSE . && npm publish && git reset --hard && git clean -f && cd ..",
-    "merge-and-publish:post":"git checkout master && git merge develop",
+    "merge-and-publish": "mv ../README.md .&& mv ../LICENSE . && npm publish && git reset --hard && git clean -f",
+    "merge-and-publish:post":"git checkout master && git merge develop"
   },
   "main": "urlhandler",
   "typings": "index.d.ts",
