@@ -1,6 +1,6 @@
 {
   "name": "nativescript-urlhandler",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Register custom URLs for your NativeScript app",
   "scripts": {
     "preclean": "npm i rimraf",
@@ -18,18 +18,18 @@
     "demo.android": "npm run preparedemo && cd test/e2e && tns run android --emulator",
     "preparedemo": "npm run build && cd test/e2e && npm i && tns plugin remove nativescript-urlhandler && tns plugin add ../.. && tns install",
     "ci.tslint": "npm i && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**'",
-    "changelog":"conventional-changelog -p angular -i ../CHANGELOG.md -s -r 0",
-    "postchangelog":"git add ../CHANGELOG.md && git commit -m 'chore(changelog): Updated CHANGELOG.md'",
+    "changelog": "conventional-changelog -p angular -i ../CHANGELOG.md -s -r 0",
+    "postchangelog": "git add ../CHANGELOG.md && git commit -m 'chore(changelog): Updated CHANGELOG.md'",
     "release:pre": "npm run clean && npm run build && npm run test",
-    "git-tag":"git tag 'v'${npm_package_version}",
+    "git-tag": "git tag 'v'${npm_package_version}",
     "release:post": "git add package.json && git commit -m 'chore(release): New release version' && npm run changelog && npm run git-tag && npm run version-and-push",
     "release:major": "npm run release:pre && npm version major && npm run release:post",
     "release:minor": "npm run release:pre && npm version minor && npm run release:post",
     "release:patch": "npm run release:pre && npm version patch && npm run release:post",
     "version-and-push": "git push origin && git push origin --tags && npm run merge-and-publish",
-    "merge-and-publish:pre":"git checkout master && git merge develop",
+    "merge-and-publish:pre": "git checkout master && git merge develop",
     "merge-and-publish": "mv ../README.md .&& mv ../LICENSE . && npm publish && git reset --hard && git clean -f",
-    "merge-and-publish:post":"git checkout master && git merge develop"
+    "merge-and-publish:post": "git checkout master && git merge develop"
   },
   "main": "urlhandler",
   "typings": "index.d.ts",
