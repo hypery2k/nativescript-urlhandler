@@ -1,10 +1,11 @@
-<a name="1.2.0"></a>
-# [1.2.0](https://github.com/hypery2k/nativescript-urlhandler/compare/v1.1.1...v1.2.0) (2017-08-24)
+<a name="1.2.1"></a>
+## [1.2.1](https://github.com/hypery2k/nativescript-urlhandler/compare/v1.1.1...v1.2.1) (2017-10-02)
 
 
 ### Bug Fixes
 
 * **iOS-cold-start:** Let app handle URL when launched fresh ([504f701](https://github.com/hypery2k/nativescript-urlhandler/commit/504f701))
+* **tslint:** Make tslint happy again ([1de3679](https://github.com/hypery2k/nativescript-urlhandler/commit/1de3679))
 
 
 ### Features
