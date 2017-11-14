@@ -67,6 +67,12 @@ src/lib
 src/platforms
 src/hooks
 src/node_modules
+src/*.js
+src/*.js.map
+src/*.metadata.json
+src/**/*.js
+src/**/*.js.map
+src/**/*.ngfactory.ts
 target/
 
 # demo apps

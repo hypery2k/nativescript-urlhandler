@@ -4,7 +4,7 @@
   "description": "Register custom URLs for your NativeScript app",
   "scripts": {
     "preclean": "npm i rimraf",
-    "clean": "rimraf node_modules hooks platforms target '*.js' '*.js.map' 'test/e2e/**/*.js' 'test/e2e/**/*.js.map' test/e2e/platforms test/e2e/node_modules test/e2e/hooks",
+    "clean": "rimraf node_modules hooks platforms target 'angular.js' 'angular.d.ts' 'urlhandler.*.js' '*.*.d.ts' '*.ngsummary.json' '*.metadata.json' '*.js.map'  'test/e2e/**/*.js' 'test/e2e/**/*.js.map' test/e2e/platforms test/e2e/node_modules test/e2e/hooks",
     "postclean": "npm i",
     "prebuild": "npm run tslint",
     "build": "npm run ngc",
