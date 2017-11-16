@@ -46,7 +46,7 @@ And for pure NativeScript:
 var handleOpenURL = require("nativescript-urlhandler").handleOpenURL;
 
 handleOpenURL(function(appURL) {
-console.log('Got the following appURL', appURL);
+  console.log('Got the following appURL', appURL);
 });
 
 ```
@@ -55,7 +55,7 @@ Or as TypeScript:
 import { handleOpenURL, AppURL } from 'nativescript-urlhandler';
 
 handleOpenURL((appURL: AppURL) => {
-    console.log('Got the following appURL', appURL);
+  console.log('Got the following appURL', appURL);
 });
 
 ```
