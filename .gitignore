@@ -69,6 +69,7 @@ src/hooks
 src/node_modules
 src/*.js
 src/*.js.map
+src/*.d.ts
 src/*.metadata.json
 src/**/*.js
 src/**/*.js.map

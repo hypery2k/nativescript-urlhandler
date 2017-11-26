@@ -4,14 +4,15 @@
   "description": "Register custom URLs for your NativeScript app",
   "scripts": {
     "preclean": "npm i rimraf",
-    "clean": "rimraf node_modules hooks platforms target 'angular.js' 'angular.d.ts' 'urlhandler.*.js' '*.*.d.ts' '*.ngsummary.json' '*.metadata.json' '*.js.map'  'test/e2e/**/*.js' 'test/e2e/**/*.js.map' test/e2e/platforms test/e2e/node_modules test/e2e/hooks",
+    "clean": "rimraf node_modules hooks platforms target urlhandler.*.js urlhandler.*.d.ts *.ngsummary.json *.metadata.json *.js.map  test/e2e/**/*.js test/e2e/**/*.js.map test/e2e/platforms test/e2e/node_modules test/e2e/hooks",
     "postclean": "npm i",
     "prebuild": "npm run tslint",
     "build": "npm run ngc",
     "tsc": "tsc",
     "ngc": "node --max-old-space-size=8192 ./node_modules/.bin/ngc",
     "tslint": "tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**'",
-    "test": "npm run tslint && npm run jasmine",
+    "pretest": "npm run tslint && tsc --p tsconfig.spec.json",
+    "test": "npm run jasmine",
     "e2e": "npm run preparedemo && cd test/e2e && tns build ios && tns build android",
     "jasmine": "babel-node test/spec/run.js",
     "demo.ios": "npm run preparedemo && cd test/e2e && tns run ios --emulator",
@@ -79,7 +80,7 @@
     "tslib": "1.7.0",
     "tslint": "5.4.3",
     "tslint-eslint-rules": "4.1.0",
-    "typescript": "2.5.1",
+    "typescript": "2.6.1",
     "zone.js": "0.8.17"
   },
   "repository": {
