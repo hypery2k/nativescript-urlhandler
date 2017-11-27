@@ -21,7 +21,7 @@
     "ci.tslint": "npm i && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**'",
     "changelog": "conventional-changelog -p angular -i ../CHANGELOG.md -s -r 0",
     "postchangelog": "git add ../CHANGELOG.md && git commit -m 'chore(changelog): Updated CHANGELOG.md'",
-    "release:pre": "npm run clean && npm run build && npm run test",
+    "release:pre": "npm run clean && npm run build && npm run test && npm run build",
     "git-tag": "git tag 'v'${npm_package_version}",
     "release:post": "git add package.json && git commit -m 'chore(release): New release version' && npm run changelog && npm run git-tag && npm run version-and-push",
     "release:major": "npm run release:pre && npm version major && npm run release:post",
