@@ -42,6 +42,7 @@ timeout(60) {
             }
 
             stage('Publish NPM snapshot') {
+                sh "npm run build"
                 nodeJS.publishSnapshot('src', buildNumber, branchName)
             }
 

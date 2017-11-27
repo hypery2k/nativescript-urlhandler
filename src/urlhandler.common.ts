@@ -1,4 +1,4 @@
-import { AppURL, UrlHandlerCallback } from './index';
+import { AppURL, UrlHandlerCallback } from './urlhandler';
 let URL_HANDLER_CB: UrlHandlerCallback;
 
 /**
