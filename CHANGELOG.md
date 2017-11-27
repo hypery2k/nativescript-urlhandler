@@ -1,3 +1,20 @@
+<a name="1.2.2"></a>
+## [1.2.2](https://github.com/hypery2k/nativescript-urlhandler/compare/v1.2.1...v1.2.2) (2017-11-27)
+
+
+### Bug Fixes
+
+* **bundle-error:** Resolve webpack error ([e5c8066](https://github.com/hypery2k/nativescript-urlhandler/commit/e5c8066))
+* **tests:** Corrected tsconfig to let unit tests work ([a77f68a](https://github.com/hypery2k/nativescript-urlhandler/commit/a77f68a))
+
+
+### Features
+
+* **AoT:** Skip emit of ts helpers ([2cfa948](https://github.com/hypery2k/nativescript-urlhandler/commit/2cfa948))
+* **TNS3.x:** SUpport for newer nativescript ([c53e682](https://github.com/hypery2k/nativescript-urlhandler/commit/c53e682))
+
+
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://github.com/hypery2k/nativescript-urlhandler/compare/v1.1.1...v1.2.1) (2017-10-02)
 
