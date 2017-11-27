@@ -41,10 +41,12 @@ timeout(60) {
                 sh "cd demo-angular && npm run build.plugin && npm i && npm run build-ios-bundle && npm run build-android-bundle"
             }
 
-            stage('Publish NPM snapshot') {
-                sh "npm run build"
-                nodeJS.publishSnapshot('src', buildNumber, branchName)
-            }
+            dir('src') {
+                stage('Publish NPM snapshot') {
+                    sh "npm run build"
+                    nodeJS.publishSnapshot('.', buildNumber, branchName)
+                }
+            }            
 
         } catch (e) {
             mail subject: "${env.JOB_NAME} (${env.BUILD_NUMBER}): Error on build", to: 'github@martinreinhardt-online.de', body: "Please go to ${env.BUILD_URL}."
