@@ -2,7 +2,7 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/hypery2k/nativescript-urlhandler.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/hypery2k/nativescript-urlhandler.svg?branch=master)](https://travis-ci.org/hypery2k/nativescript-urlhandler)
-[![npm version](https://badge.fury.io/js/nativescript-urlhandler.svg)](http://badge.fury.io/js/nativescript-urlhandler)
+[![npm version](https://badge.fury.io/js/nativescript-urlhandler.svg)](http://badge.fury.io/js/nativescript-urlhandler)[![Maintainability](https://api.codeclimate.com/v1/badges/7db5d127cfd7529f7b9a/maintainability)](https://codeclimate.com/github/hypery2k/nativescript-urlhandler/maintainability)
 
 [![NPM](https://nodei.co/npm/nativescript-urlhandler.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/nativescript-urlhandler/)
 
