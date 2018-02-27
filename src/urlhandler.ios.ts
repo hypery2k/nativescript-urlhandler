@@ -4,83 +4,59 @@ export { handleOpenURL } from './urlhandler.common';
 
 const appDelegate = getAppDelegate();
 
-(function () {
-    let applicationDidFinishLaunchingWithOptions = appDelegate.prototype.applicationDidFinishLaunchingWithOptions
-        || ((application: UIApplication, launchOptions: NSDictionary<any, any>): boolean => true);
+function enableMultipleOverridesFor(classRef, methodName) {
+    let method = classRef.prototype[methodName] || (() => {});
+    classRef.prototype[methodName] = undefined;
 
-    appDelegate.prototype.applicationDidFinishLaunchingWithOptions = undefined;
-
-    Object.defineProperty(appDelegate.prototype, 'applicationDidFinishLaunchingWithOptions', {
-        get: () => {
-            return applicationDidFinishLaunchingWithOptions;
+    Object.defineProperty(classRef.prototype, methodName, {
+        get: function () {
+            return method;
         },
-        set: (nextImplementation) => {
-            const currentImplementation = applicationDidFinishLaunchingWithOptions;
+        set: function (nextImplementation) {
+            const currentImplementation = method;
 
-            applicationDidFinishLaunchingWithOptions = (
-                application: UIApplication,
-                launchOptions: NSDictionary<any, any>
-            ): boolean => {
-                const result = currentImplementation(application, launchOptions);
-                return nextImplementation(application, launchOptions, result);
+            method = function () {
+                const result = currentImplementation(...Array.from(arguments));
+                return nextImplementation(...Array.from(arguments), result);
             };
         }
     });
+}
 
-    appDelegate.prototype.applicationDidFinishLaunchingWithOptions = function (
-        application: UIApplication,
-        launchOptions: NSDictionary<any, any>
-    ): boolean {
-        if (launchOptions != null) {
-            let urlOptions: string = launchOptions.valueForKey('UIApplicationLaunchOptionsURLKey');
-            if (urlOptions) {
-                let appURL = extractAppURL(urlOptions);
-                if (appURL != null) {
-                    getCallback()(appURL);
-                }
-            }
-        }
-
-        return true;
-    };
-})();
-
-(function () {
-    let applicationOpenURLOptions = appDelegate.prototype.applicationOpenURLOptions
-        || ((application: UIApplication, url: NSURL, options: any): boolean => false);
-
-    appDelegate.prototype.applicationOpenURLOptions = undefined;
-
-    Object.defineProperty(appDelegate.prototype, 'applicationOpenURLOptions', {
-        get: function () {
-            return applicationOpenURLOptions;
-        },
-        set: function (nextImplementation) {
-            const currentImplementation = applicationOpenURLOptions;
-
-            applicationOpenURLOptions = (application: UIApplication, url: NSURL, options: any): boolean => {
-                const result = currentImplementation(application, url, options);
-                return nextImplementation(application, url, options, result);
-            }
-        }
-    });
-
-    appDelegate.prototype.applicationOpenURLOptions = function (
-        application: UIApplication,
-        url: NSURL,
-        options: any
-    ): boolean {
-        const lastArgument = arguments[arguments.length - 1];
-        const previousResult = lastArgument !== options ? lastArgument : undefined;
-
-        if (!previousResult) {
-            let appURL = extractAppURL(url.absoluteString);
+enableMultipleOverridesFor(appDelegate, 'applicationDidFinishLaunchingWithOptions');
+appDelegate.prototype.applicationDidFinishLaunchingWithOptions = function (
+    application: UIApplication,
+    launchOptions: NSDictionary<any, any>
+): boolean {
+    if (launchOptions != null) {
+        let urlOptions: string = launchOptions.valueForKey('UIApplicationLaunchOptionsURLKey');
+        if (urlOptions) {
+            let appURL = extractAppURL(urlOptions);
             if (appURL != null) {
-                getCallback()(extractAppURL(appURL));
+                getCallback()(appURL);
             }
-            return true;
         }
+    }
 
-        return previousResult;
-    };
-})();
+    return true;
+};
+
+enableMultipleOverridesFor(appDelegate, 'applicationOpenURLOptions');
+appDelegate.prototype.applicationOpenURLOptions = function (
+    application: UIApplication,
+    url: NSURL,
+    options: any
+): boolean {
+    const lastArgument = arguments[arguments.length - 1];
+    const previousResult = lastArgument !== options ? lastArgument : undefined;
+
+    if (!previousResult) {
+        let appURL = extractAppURL(url.absoluteString);
+        if (appURL != null) {
+            getCallback()(extractAppURL(appURL));
+        }
+        return true;
+    }
+
+    return previousResult;
+};
