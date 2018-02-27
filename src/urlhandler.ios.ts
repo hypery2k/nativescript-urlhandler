@@ -2,7 +2,7 @@ import { getCallback, extractAppURL } from './urlhandler.common';
 import { getAppDelegate } from "./getappdelegate";
 export { handleOpenURL } from './urlhandler.common';
 
-const appDelegate = getAppDelegate();
+export const appDelegate = getAppDelegate();
 
 function enableMultipleOverridesFor(classRef, methodName) {
     let method = classRef.prototype[methodName] || (() => {});
