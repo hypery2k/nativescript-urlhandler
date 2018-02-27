@@ -1,12 +1,36 @@
-import * as application from 'application';
 import { getCallback, extractAppURL } from './urlhandler.common';
+import { getAppDelegate } from "./getappdelegate";
 export { handleOpenURL } from './urlhandler.common';
 
-export class UrlHandlerAppDelegate extends UIResponder implements UIApplicationDelegate {
+const appDelegate = getAppDelegate();
 
-    public static ObjCProtocols = [UIApplicationDelegate];
+(function () {
+    let applicationDidFinishLaunchingWithOptions = appDelegate.prototype.applicationDidFinishLaunchingWithOptions
+        || ((application: UIApplication, launchOptions: NSDictionary<any, any>): boolean => true);
 
-    applicationDidFinishLaunchingWithOptions(application: UIApplication, launchOptions: NSDictionary<any, any>) {
+    appDelegate.prototype.applicationDidFinishLaunchingWithOptions = undefined;
+
+    Object.defineProperty(appDelegate.prototype, 'applicationDidFinishLaunchingWithOptions', {
+        get: () => {
+            return applicationDidFinishLaunchingWithOptions;
+        },
+        set: (nextImplementation) => {
+            const currentImplementation = applicationDidFinishLaunchingWithOptions;
+
+            applicationDidFinishLaunchingWithOptions = (
+                application: UIApplication,
+                launchOptions: NSDictionary<any, any>
+            ): boolean => {
+                const result = currentImplementation(application, launchOptions);
+                return nextImplementation(application, launchOptions, result);
+            };
+        }
+    });
+
+    appDelegate.prototype.applicationDidFinishLaunchingWithOptions = function (
+        application: UIApplication,
+        launchOptions: NSDictionary<any, any>
+    ): boolean {
         if (launchOptions != null) {
             let urlOptions: string = launchOptions.valueForKey('UIApplicationLaunchOptionsURLKey');
             if (urlOptions) {
@@ -16,18 +40,47 @@ export class UrlHandlerAppDelegate extends UIResponder implements UIApplicationD
                 }
             }
         }
+
         return true;
-    }
+    };
+})();
 
+(function () {
+    let applicationOpenURLOptions = appDelegate.prototype.applicationOpenURLOptions
+        || ((application: UIApplication, url: NSURL, options: any): boolean => false);
 
-    applicationOpenURLOptions(application: UIApplication, url: NSURL, options: any): boolean {
-        let appURL = extractAppURL(url.absoluteString);
-        if (appURL != null) {
-            getCallback()(extractAppURL(appURL));
+    appDelegate.prototype.applicationOpenURLOptions = undefined;
+
+    Object.defineProperty(appDelegate.prototype, 'applicationOpenURLOptions', {
+        get: function () {
+            return applicationOpenURLOptions;
+        },
+        set: function (nextImplementation) {
+            const currentImplementation = applicationOpenURLOptions;
+
+            applicationOpenURLOptions = (application: UIApplication, url: NSURL, options: any): boolean => {
+                const result = currentImplementation(application, url, options);
+                return nextImplementation(application, url, options, result);
+            }
         }
-        return true;
-    }
+    });
 
-}
+    appDelegate.prototype.applicationOpenURLOptions = function (
+        application: UIApplication,
+        url: NSURL,
+        options: any
+    ): boolean {
+        const lastArgument = arguments[arguments.length - 1];
+        const previousResult = lastArgument !== options ? lastArgument : undefined;
 
-application.ios.delegate = UrlHandlerAppDelegate;
+        if (!previousResult) {
+            let appURL = extractAppURL(url.absoluteString);
+            if (appURL != null) {
+                getCallback()(extractAppURL(appURL));
+            }
+            return true;
+        }
+
+        return previousResult;
+    };
+})();
