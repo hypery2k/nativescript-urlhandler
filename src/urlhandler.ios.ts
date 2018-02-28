@@ -5,17 +5,21 @@ export { handleOpenURL } from './urlhandler.common';
 export const appDelegate = getAppDelegate();
 
 function enableMultipleOverridesFor(classRef, methodName) {
-    let method = classRef.prototype[methodName] || (() => {});
-    classRef.prototype[methodName] = undefined;
+    const prefix = '_';
+
+    Object.defineProperty(classRef.prototype, prefix + methodName, {
+        value: classRef.prototype[methodName] || (() => {}),
+        writable: true
+    });
 
     Object.defineProperty(classRef.prototype, methodName, {
         get: function () {
-            return method;
+            return classRef.prototype[prefix + methodName];
         },
         set: function (nextImplementation) {
-            const currentImplementation = method;
+            const currentImplementation = classRef.prototype[prefix + methodName];
 
-            method = function () {
+            classRef.prototype[prefix + methodName] = function () {
                 const result = currentImplementation(...Array.from(arguments));
                 return nextImplementation(...Array.from(arguments), result);
             };
