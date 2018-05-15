@@ -98,7 +98,7 @@ Replace *myapp* with your desired scheme and set launchMode to *singleTask*
 For example:
 
 ```xml
-<activity android:name="com.tns.NativeScriptApplication" android:label="@string/app_name" android:launchMode="singleTop">
+<activity android:name="com.tns.NativeScriptApplication" android:label="@string/app_name" android:launchMode="singleTask">
   <intent-filter>
       <action android:name="android.intent.action.MAIN" />
       <category android:name="android.intent.category.LAUNCHER" />

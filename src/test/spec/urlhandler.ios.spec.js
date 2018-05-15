@@ -1,7 +1,7 @@
 import './mocks/general.mock';
 import {
     handleOpenURL,
-    UrlHandlerAppDelegate
+    appDelegate
 } from '../../urlhandler.ios';
 
 
@@ -9,7 +9,10 @@ describe('iOS', function() {
     it('handleOpenURL', function() {
         expect(handleOpenURL).toBeDefined();
     });
-    it('UrlHandlerAppDelegate', function() {
-        expect(UrlHandlerAppDelegate).toBeDefined();
+    it('applicationDidFinishLaunchingWithOptions', function() {
+        expect(appDelegate.prototype.applicationDidFinishLaunchingWithOptions).toBeDefined();
+    });
+    it('applicationOpenURLOptions', function() {
+      expect(appDelegate.prototype.applicationOpenURLOptions).toBeDefined();
     });
 });

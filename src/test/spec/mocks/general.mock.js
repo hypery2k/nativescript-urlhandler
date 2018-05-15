@@ -8,7 +8,9 @@ mockery.registerMock("application", {
         }
     },
     ios: {
-        delegate: {}
+        delegate: {
+            prototype: {}
+        }
     },
     AndroidApplication: {
         activityResumedEvent: {}
@@ -27,4 +29,4 @@ global.android = {
 global.JavaProxy = () => {};
 global.Activity = {};
 global.UIResponder = {};
-global.UIApplicationDelegate = {}
+global.UIApplicationDelegate = {};
