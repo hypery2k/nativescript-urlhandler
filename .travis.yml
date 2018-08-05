@@ -1,98 +1,144 @@
 env:
-  global:
-    - ANDROID_PACKAGE='demo-debug.apk'
-    - ANDROID_PACKAGE_FOLDER=$TRAVIS_BUILD_DIR/demo/platforms/android/build/outputs/apk
-    - ANDROID_SAUCE_STORAGE="https://saucelabs.com/rest/v1/storage/$SAUCE_USER/$ANDROID_PACKAGE?overwrite=true"
-    - IOS_PACKAGE='demo.zip'
-    - IOS_PACKAGE_FOLDER=$TRAVIS_BUILD_DIR/demo/platforms/ios/build/emulator
-    - IOS_SAUCE_STORAGE="https://saucelabs.com/rest/v1/storage/$SAUCE_USER/$IOS_PACKAGE?overwrite=true"
+ global:
+   - NATIVESCRIPT_CLI_VERSION='4.1'
+   - ANDROID_PACKAGE='demo-debug.apk'
+   - ANDROID_PACKAGE_FOLDER=$TRAVIS_BUILD_DIR/demo/platforms/android/build/outputs/apk/debug
+   - ANDROID_SAUCE_STORAGE="https://saucelabs.com/rest/v1/storage/$SAUCE_USER/$ANDROID_PACKAGE?overwrite=true"
+   - IOS_PACKAGE='demo.zip'
+   - IOS_PACKAGE_FOLDER=$TRAVIS_BUILD_DIR/demo/platforms/ios/build/emulator
+   - IOS_SAUCE_STORAGE="https://saucelabs.com/rest/v1/storage/$SAUCE_USER/$IOS_PACKAGE?overwrite=true"
+   - EMULATOR_NAME=test
+   - EMULATOR_API_LEVEL=23
+   - ANDROID_API_LEVEL=26
+   - ANDROID_BUILD_TOOLS_VERSION=27.0.3
+   - ANDROID_ABI=armeabi-v7a
+   - ANDROID_TAG=google_apis
+   - ADB_INSTALL_TIMEOUT=20 # minutes (2 minutes by default)
 
 matrix:
-  include:
-    - stage: "Lint"
-      language: node_js
-      os: linux
-      node_js: "8"
-      script: cd src && npm run ci.tslint && cd ../demo && npm run ci.tslint && cd ../demo-angular && npm run ci.tslint
-    - stage: "WebPack"
-      os: osx
-      env:
-        - Webpack="iOS"
-      osx_image: xcode8.3
-      language: node_js 
-      node_js: "8"
-      jdk: oraclejdk8
-      before_install: cd src && npm i && cd ..
-      script: cd demo && npm run build.plugin && npm i && npm run build-ios-bundle && cd ../demo-angular && npm run build.plugin && npm i && npm run build-ios-bundle
-    - language: android
-      os: linux
-      env:
-        - Webpack="Android"
-      jdk: oraclejdk8
-      before_install: nvm install 6.10.3 && cd src && npm i && cd ..
-      script: cd demo && npm run build.plugin && npm i && npm run build-android-bundle && cd ../demo-angular && npm run build.plugin && npm i && npm run build-android-bundle
-    - stage: "Build"
-      env: 
-        - BuildAndroid="25"
-      language: android
-      os: linux
-      jdk: oraclejdk8
-      before_install: nvm install 6.10.3 && cd src && npm i && cd ..
-      script:
-        - cd demo && npm run ci.android.build && cd ../demo-angular && npm run ci.android.build
-        - "curl -u $SAUCE_USER:$SAUCE_KEY -X POST -H 'Content-Type: application/octet-stream' $ANDROID_SAUCE_STORAGE --data-binary @$ANDROID_PACKAGE_FOLDER/$ANDROID_PACKAGE"
-    - os: osx
-      env: 
-        - BuildiOS="10.3"
-        - Xcode="8.3"
-      osx_image: xcode8.3
-      language: node_js 
-      node_js: "8"
-      jdk: oraclejdk8
-      before_install: cd src && npm i && cd ..
-      script: 
-        - cd demo && npm run ci.ios.build && cd ../demo-angular && npm run ci.ios.build
-        - cd $IOS_PACKAGE_FOLDER && zip -r $IOS_PACKAGE demo.app
-        - "curl -u $SAUCE_USER:$SAUCE_KEY -X POST -H 'Content-Type: application/octet-stream' $IOS_SAUCE_STORAGE --data-binary @$IOS_PACKAGE_FOLDER/$IOS_PACKAGE"
-    - stage: "UI Tests"
-      env: 
-      - Android="23"
-      language: node_js
-      os: linux
-      node_js: "8"
-      before_install: cd src && npm i && cd ..
-      script:
-        - npm i -g appium
-        - cd demo && npm i && npm run appium --runType=android23 --sauceLab=true --appLocation=$ANDROID_PACKAGE
-    - os: linux
-      env: 
-        - iOS="10"
-      language: node_js 
-      node_js: "8"
-      before_install: cd src && npm i && cd ..
-      script: 
-        - npm i -g appium
-        - cd demo && npm i
-        - travis_wait npm run appium --runType=ios-simulator103iPhone6 --sauceLab=true --appLocation=$IOS_PACKAGE
+ include:
+   - stage: "Lint"
+     language: node_js
+     os: linux
+     node_js: "8"
+     before_install:
+      - cd publish && npm run setup-dev-env && cd ..
+     script: cd src && npm run ci.tslint && npm run build && cd ../demo && npm run ci.tslint && cd ../demo-angular && npm run ci.tslint
+   - stage: "WebPack and Build"
+     os: osx
+     env:
+       - WebpackiOS="11"
+     osx_image: xcode9.2
+     language: node_js
+     node_js: "8"
+     jdk: oraclejdk8
+     before_install:
+       - pod repo update
+       - cd publish && npm run setup-dev-env && cd ..
+       - cd src && npm i && cd ..
+     script: cd demo && npm run build.plugin && npm i && npm run build-ios-bundle && cd ../demo-angular && npm run build.plugin && npm i && npm run build-ios-bundle
+   - language: android
+     os: linux
+     env:
+       - Webpack="Android"
+     jdk: oraclejdk8
+     before_install:
+       - nvm install 8.11.3
+       - cd publish && npm run setup-dev-env && cd ..
+       - cd src && npm i && cd ..
+     script: cd demo && npm run build.plugin && npm i && npm run build-android-bundle && cd ../demo-angular && npm run build.plugin && npm i && npm run build-android-bundle
+   - language: android
+     env:
+       - BuildAndroid="26"
+     os: linux
+     jdk: oraclejdk8
+     before_install:
+       - nvm install 8.11.3
+       - android list targets
+       - android list
+       - echo no | android create avd --force -n $EMULATOR_NAME -t "android-"$EMULATOR_API_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
+       - QEMU_AUDIO_DRV=none emulator -avd $EMULATOR_NAME -no-window &
+       - cd src && npm i && cd ..
+       - cd publish && npm run setup-dev-env && cd ..
+     script:
+       - cd demo && npm run ci.android.build && cd ../demo-angular && npm run ci.android.build
+       - "curl -u $SAUCE_USER:$SAUCE_KEY -X POST -H 'Content-Type: application/octet-stream' $ANDROID_SAUCE_STORAGE --data-binary @$ANDROID_PACKAGE_FOLDER/$ANDROID_PACKAGE"
+   - os: osx
+     env:
+       - BuildiOS="11"
+       - Xcode="9.2"
+     osx_image: xcode9.2
+     language: node_js
+     node_js: "8"
+     jdk: oraclejdk8
+     before_install:
+       - pod repo update
+       - cd publish && npm run setup-dev-env && cd ..
+       - cd src && npm i && cd ..
+     script:
+       - cd demo && npm run ci.ios.build && cd ../demo-angular && npm run ci.ios.build
+       - cd $IOS_PACKAGE_FOLDER && zip -r $IOS_PACKAGE demo.app
+       - "curl -u $SAUCE_USER:$SAUCE_KEY -X POST -H 'Content-Type: application/octet-stream' $IOS_SAUCE_STORAGE --data-binary @$IOS_PACKAGE_FOLDER/$IOS_PACKAGE"
+   - stage: "UI Tests"
+     env:
+     - Android="23"
+     language: node_js
+     os: linux
+     node_js: "8"
+     before_install:
+       - cd src && npm i && cd ..
+     script:
+       - npm i -g appium
+       - cd publish && npm run setup-dev-env && cd ..
+       - cd demo && npm i
+       - travis_retry npm run e2e -- --runType android25 --sauceLab --reuseDevice --appPath $ANDROID_PACKAGE --appPackage org.nativescript.demo
+   - os: linux
+     env:
+       - iOS="10"
+     language: node_js
+     node_js: "8"
+     before_install:
+       - cd src && npm i && cd ..
+     script:
+       - npm i -g appium
+       - cd publish && npm run setup-dev-env && cd ..
+       - cd demo && npm i
+       - travis_wait travis_retry npm run e2e -- --runType sim103iPhone6 --sauceLab --reuseDevice --appPath $IOS_PACKAGE --appPackage org.nativescript.demo
 
 android:
-  components:
-    - tools
-    - platform-tools
-    - build-tools-25.0.2
-    - android-25
-    - extra-android-m2repository
+ components:
+   - tools # to get the new `repository-11.xml`
+   - platform-tools
+   - tools # to install Android SDK tools 25.1.x
+   - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+   - android-$ANDROID_API_LEVEL
+   - android-$EMULATOR_API_LEVEL
+   # For Google APIs
+   - addon-google_apis-google-$ANDROID_API_LEVEL
+   - addon-google_apis-google-$EMULATOR_API_LEVEL
+   # Google Play Services
+   - extra-google-google_play_services
+   # Support library
+   - extra-android-support
+   # Latest artifacts in local repository
+   - extra-google-m2repository
+   - extra-android-m2repository
+   # Specify at least one system image
+   - sys-img-armeabi-v7a-google_apis-$ANDROID_API_LEVEL
+   - sys-img-armeabi-v7a-google_apis-$EMULATOR_API_LEVEL
+licenses:
+  - ".+"
 
 before_cache:
-    - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
 
 cache:
-    directories:
-        - .nvm
-        - $HOME/.gradle/caches/
-        - $HOME/.gradle/wrapper/
+   directories:
+       - .nvm
+       - $HOME/.gradle/caches/
+       - $HOME/.gradle/wrapper/
 
 install:
-    - npm install -g nativescript
-    - tns usage-reporting disable
-    - tns error-reporting disable
+   - npm install -g nativescript@$NATIVESCRIPT_CLI_VERSION
+   - tns usage-reporting disable
+   - tns error-reporting disable
