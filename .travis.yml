@@ -12,7 +12,7 @@ matrix:
     - stage: "Lint"
       language: node_js
       os: linux
-      node_js: "6"
+      node_js: "8"
       script: cd src && npm run ci.tslint && cd ../demo && npm run ci.tslint && cd ../demo-angular && npm run ci.tslint
     - stage: "WebPack"
       os: osx
@@ -20,7 +20,7 @@ matrix:
         - Webpack="iOS"
       osx_image: xcode8.3
       language: node_js 
-      node_js: "6"
+      node_js: "8"
       jdk: oraclejdk8
       before_install: cd src && npm i && cd ..
       script: cd demo && npm run build.plugin && npm i && npm run build-ios-bundle && cd ../demo-angular && npm run build.plugin && npm i && npm run build-ios-bundle
@@ -47,7 +47,7 @@ matrix:
         - Xcode="8.3"
       osx_image: xcode8.3
       language: node_js 
-      node_js: "6"
+      node_js: "8"
       jdk: oraclejdk8
       before_install: cd src && npm i && cd ..
       script: 
@@ -59,7 +59,7 @@ matrix:
       - Android="23"
       language: node_js
       os: linux
-      node_js: "6"
+      node_js: "8"
       before_install: cd src && npm i && cd ..
       script:
         - npm i -g appium
@@ -68,7 +68,7 @@ matrix:
       env: 
         - iOS="10"
       language: node_js 
-      node_js: "6"
+      node_js: "8"
       before_install: cd src && npm i && cd ..
       script: 
         - npm i -g appium
