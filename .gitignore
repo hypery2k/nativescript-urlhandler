@@ -41,7 +41,14 @@ Thumbs.db
 /typings/
 /tsd_typings/
 
+# demo lock files
+demo-angular/package-lock.json
+demo/package-lock.json
+
 # Dist #
+src/platforms/android/nativescript_fabric.aar
+/publish/package
+/publish/src
 /dist
 /public/__build__/
 /src/*/__build__/
@@ -64,17 +71,19 @@ __build__/**
 !karma*.js
 !test-main.js
 src/lib
-src/platforms
 src/hooks
 src/node_modules
 src/*.js
 src/*.js.map
-src/*.d.ts
 src/*.metadata.json
 src/**/*.js
 src/**/*.js.map
 src/**/*.ngfactory.ts
+src/**/*.metadata.json
 target/
+
+# publish, helper
+publish/node_modules/
 
 # demo apps
 demo/node_modules/
@@ -91,8 +100,8 @@ demo-angular/app/tns_modules/
 demo-angular/report
 
 # end2end app
-test/e2e/node_modules/
-test/e2e/hooks
-test/e2e/lib
-test/e2e/platforms
-test/e2e/app/tns_modules/
+src/test/e2e/node_modules/
+src/test/e2e/hooks
+src/test/e2e/lib
+src/test/e2e/platforms
+src/test/e2e/app/tns_modules/
