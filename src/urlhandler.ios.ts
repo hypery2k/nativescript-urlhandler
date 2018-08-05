@@ -57,10 +57,28 @@ appDelegate.prototype.applicationOpenURLOptions = function (
     if (!previousResult) {
         let appURL = extractAppURL(url.absoluteString);
         if (appURL != null) {
-            getCallback()(extractAppURL(appURL));
+            getCallback()(appURL);
         }
         return true;
     }
 
     return previousResult;
 };
+
+enableMultipleOverridesFor(appDelegate, 'continueUserActivity');
+appDelegate.prototype.continueUserActivity = function (
+    application: UIApplication,
+    userActivity: NSUserActivity
+): boolean {
+    if  (userActivity.activityType === NSUserActivityTypeBrowsingWeb) {
+
+        let appURL = extractAppURL(userActivity.webpageURL);
+
+        if (appURL !== null) {
+            getCallback()(appURL);
+        }
+    }
+
+    return true;
+};
+
