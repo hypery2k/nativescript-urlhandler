@@ -1,6 +1,6 @@
 env:
  global:
-   - NATIVESCRIPT_CLI_VERSION='4.1'
+   - NATIVESCRIPT_CLI_VERSION='4.2.3'
    - ANDROID_PACKAGE='demo-debug.apk'
    - ANDROID_PACKAGE_FOLDER=$TRAVIS_BUILD_DIR/demo/platforms/android/build/outputs/apk/debug
    - ANDROID_SAUCE_STORAGE="https://saucelabs.com/rest/v1/storage/$SAUCE_USER/$ANDROID_PACKAGE?overwrite=true"
@@ -36,7 +36,7 @@ matrix:
        - pod repo update
        - cd publish && npm run setup-dev-env && cd ..
        - cd src && npm i && cd ..
-     script: cd demo && npm run build.plugin && npm i && npm run build-ios-bundle && cd ../demo-angular && npm run build.plugin && npm i && npm run build-ios-bundle
+     script: cd demo && npm run build-ios-bundle && cd ../demo-angular && npm run build-ios-bundle
    - language: android
      os: linux
      env:
@@ -46,7 +46,7 @@ matrix:
        - nvm install 8.11.3
        - cd publish && npm run setup-dev-env && cd ..
        - cd src && npm i && cd ..
-     script: cd demo && npm run build.plugin && npm i && npm run build-android-bundle && cd ../demo-angular && npm run build.plugin && npm i && npm run build-android-bundle
+     script: cd demo npm run build-android-bundle && cd ../demo-angular && npm run build-android-bundle
    - language: android
      env:
        - BuildAndroid="26"

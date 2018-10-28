@@ -26,23 +26,33 @@ timeout(150) {
       }
 
       stage('Build') {
-        sh "cd publish && npm run setup-dev-env"
-        sh "cd demo && rm -rf hooks/ node_modules/ platforms/ && npm i"
-        sh "cd demo-angular && rm -rf hooks/ node_modules/ platforms/ && npm i"
+        nodeJS.nvm("install -g nativescript")
+        dir("publish") {
+          nodeJS.nvmRun("setup-dev-env")
+        }
       }
 
       stage('Webpack') {
         parallel demo: {
+          dir("demo") {
+            nodeJS.nvmRun("build-android-bundle")
+            nodeJS.nvmRun("build-ios-bundle")
+          }
           sh "cd demo  && npm run build-ios-bundle && npm run build-android-bundle"
         }, demoAngular: {
-          sh "cd demo-angular && npm run build-ios-bundle && npm run build-android-bundle"
+          dir("demo-angular") {
+            nodeJS.nvmRun("build-android-bundle")
+            nodeJS.nvmRun("build-ios-bundle")
+          }
         },
         failFast: true
       }
 
       stage('Test') {
         parallel unit:{
-          sh "cd src && npm run test"
+          dir("src") {
+            nodeJS.nvmRun("test")
+          }
         }, iOS: {
           //sh "cd demo && npm run ci.ios.build && tns test ios --justlaunch --emulator"
         }, Android: {
