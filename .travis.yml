@@ -1,6 +1,5 @@
 env:
  global:
-   - NATIVESCRIPT_CLI_VERSION='4.2.3'
    - ANDROID_PACKAGE='demo-debug.apk'
    - ANDROID_PACKAGE_FOLDER=$TRAVIS_BUILD_DIR/demo/platforms/android/build/outputs/apk/debug
    - ANDROID_SAUCE_STORAGE="https://saucelabs.com/rest/v1/storage/$SAUCE_USER/$ANDROID_PACKAGE?overwrite=true"
@@ -8,9 +7,8 @@ env:
    - IOS_PACKAGE_FOLDER=$TRAVIS_BUILD_DIR/demo/platforms/ios/build/emulator
    - IOS_SAUCE_STORAGE="https://saucelabs.com/rest/v1/storage/$SAUCE_USER/$IOS_PACKAGE?overwrite=true"
    - EMULATOR_NAME=test
-   - EMULATOR_API_LEVEL=23
-   - ANDROID_API_LEVEL=26
-   - ANDROID_BUILD_TOOLS_VERSION=27.0.3
+   - ANDROID_API_LEVEL=28
+   - ANDROID_BUILD_TOOLS_VERSION=28.0.3
    - ANDROID_ABI=armeabi-v7a
    - ANDROID_TAG=google_apis
    - ADB_INSTALL_TIMEOUT=20 # minutes (2 minutes by default)
@@ -20,18 +18,24 @@ matrix:
    - stage: "Lint"
      language: node_js
      os: linux
-     node_js: "8"
+     node_js: "10"
      before_install:
       - cd publish && npm run setup-dev-env && cd ..
      script: cd src && npm run ci.tslint && npm run build && cd ../demo && npm run ci.tslint && cd ../demo-angular && npm run ci.tslint
    - stage: "WebPack and Build"
      os: osx
      env:
-       - WebpackiOS="11"
-     osx_image: xcode9.4
+       - WebpackiOS="12"
+     osx_image: xcode10.0
      language: node_js
-     node_js: "8"
+     node_js: "10"
      jdk: oraclejdk8
+     before_script:
+       - gem install cocoapods
+       - gem install xcodeproj
+       - brew install xcproj
+       - pod repo update
+       - sudo pip install six
      before_install:
        - pod repo update
        - cd publish && npm run setup-dev-env && cd ..
@@ -43,7 +47,7 @@ matrix:
        - Webpack="Android"
      jdk: oraclejdk8
      before_install:
-       - nvm install 8.11.3
+       - nvm install 10
        - cd publish && npm run setup-dev-env && cd ..
        - cd src && npm i && cd ..
      script: cd demo npm run build-android-bundle && cd ../demo-angular && npm run build-android-bundle
@@ -53,10 +57,9 @@ matrix:
      os: linux
      jdk: oraclejdk8
      before_install:
-       - nvm install 8.11.3
+       - nvm install 10
        - android list targets
-       - android list
-       - echo no | android create avd --force -n $EMULATOR_NAME -t "android-"$EMULATOR_API_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
+       - echo no | android create avd --force -n $EMULATOR_NAME -t android-25  --abi $ANDROID_ABI --tag $ANDROID_TAG
        - QEMU_AUDIO_DRV=none emulator -avd $EMULATOR_NAME -no-window &
        - cd src && npm i && cd ..
        - cd publish && npm run setup-dev-env && cd ..
@@ -65,12 +68,17 @@ matrix:
        - "curl -u $SAUCE_USER:$SAUCE_KEY -X POST -H 'Content-Type: application/octet-stream' $ANDROID_SAUCE_STORAGE --data-binary @$ANDROID_PACKAGE_FOLDER/$ANDROID_PACKAGE"
    - os: osx
      env:
-       - BuildiOS="11"
-       - Xcode="9.2"
-     osx_image: xcode9.4
+       - BuildiOS="12"
+     osx_image: xcode10.0
      language: node_js
-     node_js: "8"
+     node_js: "10"
      jdk: oraclejdk8
+     before_script:
+       - gem install cocoapods
+       - gem install xcodeproj
+       - brew install xcproj
+       - pod repo update
+       - sudo pip install six
      before_install:
        - pod repo update
        - cd publish && npm run setup-dev-env && cd ..
@@ -81,10 +89,10 @@ matrix:
        - "curl -u $SAUCE_USER:$SAUCE_KEY -X POST -H 'Content-Type: application/octet-stream' $IOS_SAUCE_STORAGE --data-binary @$IOS_PACKAGE_FOLDER/$IOS_PACKAGE"
    - stage: "UI Tests"
      env:
-     - Android="23"
+     - Android="25"
      language: node_js
      os: linux
-     node_js: "8"
+     node_js: "10"
      before_install:
        - cd src && npm i && cd ..
      script:
@@ -96,7 +104,7 @@ matrix:
      env:
        - iOS="10"
      language: node_js
-     node_js: "8"
+     node_js: "10"
      before_install:
        - cd src && npm i && cd ..
      script:
@@ -107,15 +115,12 @@ matrix:
 
 android:
  components:
-   - tools # to get the new `repository-11.xml`
    - platform-tools
-   - tools # to install Android SDK tools 25.1.x
+   - tools # to install Android SDK tools
    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
    - android-$ANDROID_API_LEVEL
-   - android-$EMULATOR_API_LEVEL
    # For Google APIs
    - addon-google_apis-google-$ANDROID_API_LEVEL
-   - addon-google_apis-google-$EMULATOR_API_LEVEL
    # Google Play Services
    - extra-google-google_play_services
    # Support library
@@ -124,8 +129,13 @@ android:
    - extra-google-m2repository
    - extra-android-m2repository
    # Specify at least one system image
-   - sys-img-armeabi-v7a-google_apis-$ANDROID_API_LEVEL
-   - sys-img-armeabi-v7a-google_apis-$EMULATOR_API_LEVEL
+   - sys-img-armeabi-v7a-android-21
+   - sys-img-armeabi-v7a-google_apis-25
+   - sys-img-armeabi-v7a-android-$ANDROID_API_LEVEL
+
+before_install:
+    - sudo pip install --upgrade pip
+    - sudo pip install six
 licenses:
   - ".+"
 
@@ -139,6 +149,6 @@ cache:
        - $HOME/.gradle/wrapper/
 
 install:
-   - npm install -g nativescript@$NATIVESCRIPT_CLI_VERSION
+   - echo no | npm install -g nativescript
    - tns usage-reporting disable
    - tns error-reporting disable

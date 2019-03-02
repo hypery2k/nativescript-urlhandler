@@ -66,6 +66,7 @@ handleOpenURL((appURL: AppURL) => {
 
 ```
 
+>Note: see `demo` app for sample usage. Start by adding handleOpenURL in app main!
 
 
 ## Installation

@@ -9,8 +9,8 @@ describe('iOS', function() {
     it('handleOpenURL', function() {
         expect(handleOpenURL).toBeDefined();
     });
-    it('applicationDidFinishLaunchingWithOptions', function() {
-        expect(appDelegate.prototype.applicationDidFinishLaunchingWithOptions).toBeDefined();
+    it('continueUserActivity', function() {
+        expect(appDelegate.prototype.continueUserActivity).toBeDefined();
     });
     it('applicationOpenURLOptions', function() {
       expect(appDelegate.prototype.applicationOpenURLOptions).toBeDefined();

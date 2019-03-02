@@ -14,26 +14,6 @@ function enableMultipleOverridesFor(classRef, methodName, nextImplementation) {
 
 enableMultipleOverridesFor(
     appDelegate,
-    'applicationDidFinishLaunchingWithOptions',
-    function (
-        application: UIApplication,
-        launchOptions: NSDictionary<any, any>
-    ): boolean {
-        if (launchOptions != null) {
-            let urlOptions: string = launchOptions.valueForKey('UIApplicationLaunchOptionsURLKey');
-            if (urlOptions) {
-                let appURL = extractAppURL(urlOptions);
-                if (appURL != null) {
-                    getCallback()(appURL);
-                }
-            }
-        }
-
-        return true;
-    });
-
-enableMultipleOverridesFor(
-    appDelegate,
     'applicationOpenURLOptions',
     function (
         application: UIApplication,
@@ -46,7 +26,7 @@ enableMultipleOverridesFor(
         if (!previousResult) {
             let appURL = extractAppURL(url.absoluteString);
             if (appURL != null) {
-                getCallback()(appURL);
+                setTimeout(() => getCallback()(appURL));
             }
             return true;
         }
@@ -66,7 +46,7 @@ enableMultipleOverridesFor(
             let appURL = extractAppURL(userActivity.webpageURL);
 
             if (appURL !== null) {
-                getCallback()(appURL);
+                setTimeout(() => getCallback()(appURL));
             }
         }
 

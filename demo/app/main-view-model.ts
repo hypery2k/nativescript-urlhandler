@@ -1,11 +1,9 @@
 import { Observable } from 'data/observable';
-import { handleOpenURL, AppURL } from 'nativescript-urlhandler';
 
 export class HelloWorldModel extends Observable {
 
     private _counter: number;
     private _message: string;
-    private _appURL: string;
 
     constructor() {
         super();
@@ -13,14 +11,8 @@ export class HelloWorldModel extends Observable {
         // Initialize default values.
         this._counter = 42;
         this.updateMessage();
-        handleOpenURL((appURL: AppURL) => {
-            this._appURL = appURL.toString();
-        });
     }
 
-    get appURL(): string {
-        return this._appURL;
-    }
     get message(): string {
         return this._message;
     }

@@ -28,7 +28,5 @@ https://docs.nativescript.org/ui/components.
         <Label text="Tap the button" class="h1 text-center"/>
         <Button text="TAP" tap="{{ onTap }}" automationText="tapButton" class="btn btn-primary btn-active"/>
         <Label text="{{ message }}"  automationText="messageLabel" class="h2 text-center" textWrap="true"/>
-        <Label text="app URL:" class="h1 text-center"/>
-        <Label text="{{ appURL }}" class="h2 text-center" textWrap="true"/>
     </StackLayout>
 </Page>
