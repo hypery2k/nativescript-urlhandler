@@ -1,10 +1,28 @@
+<a name="1.2.3"></a>
+## [1.2.3](https://github.com/hypery2k/nativescript-urlhandler/compare/v1.2.2...v1.2.3) (2019-03-02)
+
+
+### Bug Fixes
+
+* **iOS:** Modify enableMultipleOverridesFor ([#81](https://github.com/hypery2k/nativescript-urlhandler/issues/81)) ([dff9718](https://github.com/hypery2k/nativescript-urlhandler/commit/dff9718))
+* **Security:** Upgrade packages ([03fc080](https://github.com/hypery2k/nativescript-urlhandler/commit/03fc080))
+
+
+### Features
+
+* **NativeScript 4:** Let module support TNS 4 ([e673824](https://github.com/hypery2k/nativescript-urlhandler/commit/e673824))
+* **NativeScript 5:** Resolve Upgrade issues ([cd69391](https://github.com/hypery2k/nativescript-urlhandler/commit/cd69391))
+* **Universal Links:** Set base for deep linking ([3ee4322](https://github.com/hypery2k/nativescript-urlhandler/commit/3ee4322)), closes [#74](https://github.com/hypery2k/nativescript-urlhandler/issues/74)
+
+
+
 <a name="1.2.2"></a>
 ## [1.2.2](https://github.com/hypery2k/nativescript-urlhandler/compare/v1.2.1...v1.2.2) (2017-11-27)
 
 
 ### Bug Fixes
 
-* **bundle-error:** Resolve webpack error ([e5c8066](https://github.com/hypery2k/nativescript-urlhandler/commit/e5c8066))
+* **bundle-error:** Resolve webpack error ([e5c8066](https://github.com/hypery2k/nativescript-urlhandler/commit/e5c8066)), closes [#49](https://github.com/hypery2k/nativescript-urlhandler/issues/49)
 * **tests:** Corrected tsconfig to let unit tests work ([a77f68a](https://github.com/hypery2k/nativescript-urlhandler/commit/a77f68a))
 
 
@@ -37,8 +55,8 @@
 
 ### Features
 
-* **error-handling:** Improve config error handling ([bebb7c8](https://github.com/hypery2k/nativescript-urlhandler/commit/bebb7c8))
-* **error-handling:** Improve config error handling ([32f96ff](https://github.com/hypery2k/nativescript-urlhandler/commit/32f96ff))
+* **error-handling:** Improve config error handling ([bebb7c8](https://github.com/hypery2k/nativescript-urlhandler/commit/bebb7c8)), closes [#51](https://github.com/hypery2k/nativescript-urlhandler/issues/51)
+* **error-handling:** Improve config error handling ([32f96ff](https://github.com/hypery2k/nativescript-urlhandler/commit/32f96ff)), closes [#51](https://github.com/hypery2k/nativescript-urlhandler/issues/51)
 
 
 
@@ -67,7 +85,7 @@
 ### Bug Fixes
 
 * **action-error:** Resolve action error on android ([76ceef4](https://github.com/hypery2k/nativescript-urlhandler/commit/76ceef4))
-* **Action-Error:** Solve Android action error ([3ee1f62](https://github.com/hypery2k/nativescript-urlhandler/commit/3ee1f62))
+* **Action-Error:** Solve Android action error ([3ee1f62](https://github.com/hypery2k/nativescript-urlhandler/commit/3ee1f62)), closes [#22](https://github.com/hypery2k/nativescript-urlhandler/issues/22)
 * **Action-Error:** Solve Android action error ([a6ad692](https://github.com/hypery2k/nativescript-urlhandler/commit/a6ad692))
 
 
@@ -88,9 +106,9 @@
 
 ### Bug Fixes
 
-* **android-error:** Solve android error ([0d50701](https://github.com/hypery2k/nativescript-urlhandler/commit/0d50701))
-* **android-error:** Solve callback never called ([d38b6a0](https://github.com/hypery2k/nativescript-urlhandler/commit/d38b6a0))
-* **init:** initialize the modules with the custom application object ([e99238e](https://github.com/hypery2k/nativescript-urlhandler/commit/e99238e))
+* **android-error:** Solve android error ([0d50701](https://github.com/hypery2k/nativescript-urlhandler/commit/0d50701)), closes [#16](https://github.com/hypery2k/nativescript-urlhandler/issues/16)
+* **android-error:** Solve callback never called ([d38b6a0](https://github.com/hypery2k/nativescript-urlhandler/commit/d38b6a0)), closes [#16](https://github.com/hypery2k/nativescript-urlhandler/issues/16)
+* **init:** initialize the modules with the custom application object ([e99238e](https://github.com/hypery2k/nativescript-urlhandler/commit/e99238e)), closes [#16](https://github.com/hypery2k/nativescript-urlhandler/issues/16)
 * **ts-errors:** Resolve small typescript errors ([ef5aff4](https://github.com/hypery2k/nativescript-urlhandler/commit/ef5aff4))
 
 
@@ -101,7 +119,7 @@
 
 ### Bug Fixes
 
-* **module-error:** Use commonjs module in tsconfig ([a39c61d](https://github.com/hypery2k/nativescript-urlhandler/commit/a39c61d))
+* **module-error:** Use commonjs module in tsconfig ([a39c61d](https://github.com/hypery2k/nativescript-urlhandler/commit/a39c61d)), closes [#15](https://github.com/hypery2k/nativescript-urlhandler/issues/15)
 
 
 
@@ -111,7 +129,7 @@
 
 ### Features
 
-* **trigger-once:** Use last data to check if data has changed ([971d0d9](https://github.com/hypery2k/nativescript-urlhandler/commit/971d0d9))
+* **trigger-once:** Use last data to check if data has changed ([971d0d9](https://github.com/hypery2k/nativescript-urlhandler/commit/971d0d9)), closes [#9](https://github.com/hypery2k/nativescript-urlhandler/issues/9)
 
 
 
@@ -121,12 +139,12 @@
 
 ### Bug Fixes
 
-* **reinvocation-error:** Remember state to no invoke a second time ([d810a40](https://github.com/hypery2k/nativescript-urlhandler/commit/d810a40))
+* **reinvocation-error:** Remember state to no invoke a second time ([d810a40](https://github.com/hypery2k/nativescript-urlhandler/commit/d810a40)), closes [#9](https://github.com/hypery2k/nativescript-urlhandler/issues/9)
 
 
 ### Features
 
-* **demo-app:** Adding demo app for E2E ([841c991](https://github.com/hypery2k/nativescript-urlhandler/commit/841c991))
+* **demo-app:** Adding demo app for E2E ([841c991](https://github.com/hypery2k/nativescript-urlhandler/commit/841c991)), closes [#11](https://github.com/hypery2k/nativescript-urlhandler/issues/11)
 * **to-string:** Use better toString() implementation ([34a151f](https://github.com/hypery2k/nativescript-urlhandler/commit/34a151f))
 
 
@@ -146,8 +164,8 @@
 
 * **error-handling:** Adding basic error handling ([2ff5c8d](https://github.com/hypery2k/nativescript-urlhandler/commit/2ff5c8d))
 * **extract-url:** Finalize URL extraction ([5c821a8](https://github.com/hypery2k/nativescript-urlhandler/commit/5c821a8))
-* **unit-tests:** Adding unit-tests for iOS ([8c5be43](https://github.com/hypery2k/nativescript-urlhandler/commit/8c5be43))
-* **unit-tests:** Basic unit tests ([fdf9bf7](https://github.com/hypery2k/nativescript-urlhandler/commit/fdf9bf7))
+* **unit-tests:** Adding unit-tests for iOS ([8c5be43](https://github.com/hypery2k/nativescript-urlhandler/commit/8c5be43)), closes [#2](https://github.com/hypery2k/nativescript-urlhandler/issues/2)
+* **unit-tests:** Basic unit tests ([fdf9bf7](https://github.com/hypery2k/nativescript-urlhandler/commit/fdf9bf7)), closes [#2](https://github.com/hypery2k/nativescript-urlhandler/issues/2)
 
 
 
