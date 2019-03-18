@@ -6,7 +6,6 @@ export { handleOpenURL } from './urlhandler.common';
 export function handleIntent(intent: any) {
     let data = intent.getData();
     try {
-        console.log(data);
         let appURL = extractAppURL(data);
         if (appURL != null &&
             (new String(intent.getAction()).valueOf() === new String(android.content.Intent.ACTION_MAIN).valueOf()
