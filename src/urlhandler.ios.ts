@@ -36,7 +36,7 @@ enableMultipleOverridesFor(
 
 enableMultipleOverridesFor(
     appDelegate,
-    'continueUserActivity',
+    'applicationContinueUserActivityRestorationHandler',
     function (
         application: UIApplication,
         userActivity: NSUserActivity
