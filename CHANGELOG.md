@@ -1,3 +1,20 @@
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/hypery2k/nativescript-urlhandler/compare/v1.2.3...v1.3.0) (2019-06-19)
+
+
+### Bug Fixes
+
+* **iOS:** Corrected linking in iOS ([e6af92a](https://github.com/hypery2k/nativescript-urlhandler/commit/e6af92a))
+* **Logging:** Drop obsolete console.log ([c33ac0a](https://github.com/hypery2k/nativescript-urlhandler/commit/c33ac0a)), closes [#84](https://github.com/hypery2k/nativescript-urlhandler/issues/84)
+* **Tests:** Corrected unit tests ([a9b8071](https://github.com/hypery2k/nativescript-urlhandler/commit/a9b8071))
+
+
+### Features
+
+* **Angular:** Support for Angular 8 added ([75696da](https://github.com/hypery2k/nativescript-urlhandler/commit/75696da))
+
+
+
 <a name="1.2.3"></a>
 ## [1.2.3](https://github.com/hypery2k/nativescript-urlhandler/compare/v1.2.2...v1.2.3) (2019-03-02)
 
