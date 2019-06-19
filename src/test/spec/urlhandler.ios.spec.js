@@ -10,7 +10,7 @@ describe('iOS', function() {
         expect(handleOpenURL).toBeDefined();
     });
     it('continueUserActivity', function() {
-        expect(appDelegate.prototype.continueUserActivity).toBeDefined();
+        expect(appDelegate.prototype.applicationContinueUserActivityRestorationHandler).toBeDefined();
     });
     it('applicationOpenURLOptions', function() {
       expect(appDelegate.prototype.applicationOpenURLOptions).toBeDefined();
