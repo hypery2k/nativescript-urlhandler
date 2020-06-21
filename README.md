@@ -177,3 +177,27 @@ If your Webpack Build is failing, try adapting your tsconfig to this:
         "**/*.aot.ts"
     ]
 ```
+
+## HTTPS intent
+
+This lib also support HTTPS intent, you can define a host for it. Here is an example on Android with both custom & HTTPS scheme : 
+
+```xml
+<intent-filter>
+  <action android:name="android.intent.action.VIEW" />
+  <category android:name="android.intent.category.DEFAULT" />
+  <category android:name="android.intent.category.BROWSABLE" />
+  <data android:scheme="my-app" />
+</intent-filter>
+<intent-filter>
+  <action android:name="android.intent.action.VIEW" />
+  <category android:name="android.intent.category.DEFAULT" />
+  <category android:name="android.intent.category.BROWSABLE" />
+  <data android:scheme="https" android:host="my-website.com" />
+</intent-filter>
+```
+
+Let's suppose your put a `<a href="https://my-website.com/check-our-app">Check our mobile app</a>` link on your website to open your mobile app. 
+Because https intent is also linked to the mobile browser, when user will tap on the link, a popup will appears to let the user choose between the browser and your mobile app to open this link.
+
+In the other hand, if you setup a `android:scheme="my-app"` that only your app react to, putting a  `<a href="my-app://check-our-app">Check our mobile app</a>` link like this on your website will avoid this popup and open your mobile app directly.
