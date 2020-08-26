@@ -11,7 +11,11 @@ export function handleIntent(intent: any) {
             (new String(intent.getAction()).valueOf() === new String(android.content.Intent.ACTION_MAIN).valueOf()
                 || new String(intent.getAction()).valueOf() === new String(android.content.Intent.ACTION_VIEW).valueOf())) {
             try {
-                setTimeout(() => getCallback()(appURL));
+                setTimeout(() => {
+                  let result = getCallback()(appURL);
+                  intent.setAction("");
+                  return result; 
+                });
             } catch (ignored) {
                 application.android.on(application.AndroidApplication.activityResultEvent, () => {
                     setTimeout(() => getCallback()(appURL));
