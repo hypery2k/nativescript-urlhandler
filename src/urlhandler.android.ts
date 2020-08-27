@@ -13,7 +13,9 @@ export function handleIntent(intent: any) {
             try {
                 setTimeout(() => {
                   let result = getCallback()(appURL);
+                  // clear intent so that url will not be re-handled upon subsequent ActivityStarted event
                   intent.setAction("");
+                  intent.setData(null);
                   return result; 
                 });
             } catch (ignored) {
