@@ -23,7 +23,7 @@ export function handleIntent(intent: any) {
     }
 
 }
-application.android.on(application.AndroidApplication.activityStartedEvent, (args) => {
+application.android.on(application.AndroidApplication.activityNewIntentEvent, (args) => {
     setTimeout(() => {
         let intent: android.content.Intent = args.activity.getIntent();
         try {
