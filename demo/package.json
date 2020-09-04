@@ -54,7 +54,7 @@
     "nativescript-dev-appium": "^5.0.0",
     "nativescript-dev-typescript": "^0.7.3",
     "nativescript-dev-webpack": "^0.20.2",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "tslint": "~5.4.3",
     "typescript": "2.7.2",
     "wd": "^1.11.1"
