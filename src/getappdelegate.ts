@@ -1,4 +1,4 @@
-import * as application from 'application';
+import { Application } from '@nativescript/core';
 
 /**
  * The following function is part of the NativeScript plugin: nativescript-plugin-firebase
@@ -11,7 +11,8 @@ import * as application from 'application';
 
 export function getAppDelegate() {
     // Play nice with other plugins by not completely ignoring anything already added to the appdelegate
-    if (application.ios.delegate === undefined) {
+    if (Application.ios.delegate === undefined) {
+        @NativeClass()
         class UIApplicationDelegateImpl extends UIResponder implements UIApplicationDelegate {
             public static ObjCProtocols = [UIApplicationDelegate];
 
@@ -20,10 +21,10 @@ export function getAppDelegate() {
             }
         }
 
-        application.ios.delegate = UIApplicationDelegateImpl;
+        Application.ios.delegate = UIApplicationDelegateImpl;
     }
 
-    return application.ios.delegate;
+    return Application.ios.delegate;
 }
 
 /*
