@@ -44,7 +44,7 @@
     "chai-as-promised": "~5.3.0",
     "filewalker": "0.1.2",
     "jasmine-core": "^2.5.2",
-    "karma": "^4.0.1",
+    "karma": "^6.3.14",
     "karma-jasmine": "1.1.2",
     "karma-junit-reporter": "1.2.0",
     "karma-nativescript-launcher": "^0.4.0",
