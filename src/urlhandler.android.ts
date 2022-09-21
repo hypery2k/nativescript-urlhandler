@@ -1,6 +1,6 @@
 
-import * as application from 'application';
-import { getCallback, extractAppURL } from './urlhandler.common';
+import { AndroidApplication, Application } from '@nativescript/core';
+import { extractAppURL, getCallback } from './urlhandler.common';
 export { handleOpenURL } from './urlhandler.common';
 
 export function handleIntent(intent: any) {
@@ -19,7 +19,7 @@ export function handleIntent(intent: any) {
                   return result;
                 });
             } catch (ignored) {
-                application.android.on(application.AndroidApplication.activityResultEvent, () => {
+                Application.android.on(AndroidApplication.activityResultEvent, () => {
                     setTimeout(() => getCallback()(appURL));
                 });
             }
@@ -29,7 +29,7 @@ export function handleIntent(intent: any) {
     }
 
 }
-application.android.on(application.AndroidApplication.activityNewIntentEvent, (args) => {
+Application.android.on(AndroidApplication.activityNewIntentEvent, (args) => {
     setTimeout(() => {
         let intent: android.content.Intent = args.activity.getIntent();
         try {

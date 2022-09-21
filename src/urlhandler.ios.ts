@@ -1,5 +1,5 @@
-import { getCallback, extractAppURL } from './urlhandler.common';
 import { getAppDelegate } from "./getappdelegate";
+import { extractAppURL, getCallback } from './urlhandler.common';
 export { handleOpenURL } from './urlhandler.common';
 
 export const appDelegate = getAppDelegate();

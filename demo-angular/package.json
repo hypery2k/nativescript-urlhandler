@@ -14,15 +14,6 @@
     "e2e": "tsc -p e2e && mocha --opts ./e2e/config/mocha.opts",
     "e2e-watch": "tsc -p e2e --watch"
   },
-  "nativescript": {
-    "id": "org.nativescript.demoangular",
-    "tns-ios": {
-      "version": "5.1.1"
-    },
-    "tns-android": {
-      "version": "5.1.0"
-    }
-  },
   "dependencies": {
     "@angular/common": "~7.2.0",
     "@angular/compiler": "~7.2.0",
@@ -32,12 +23,12 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
-    "nativescript-angular": "^7.2.0",
     "nativescript-theme-core": "1.0.4",
     "nativescript-urlhandler": "*",
     "rxjs": "^6.3.3",
-    "tns-core-modules": "^5.1.2",
-    "zone.js": "^0.8.4"
+    "zone.js": "^0.8.4",
+    "@nativescript/core": "~7.0.0",
+    "@nativescript/angular": "10.0.0"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^7.2.7",
@@ -59,11 +50,12 @@
     "nativescript-css-loader": "~0.26.1",
     "nativescript-dev-appium": "^5.0.0",
     "nativescript-dev-typescript": "^0.7.3",
-    "nativescript-dev-webpack": "^0.19.1",
     "nativescript-unit-test-runner": "0.3.4",
-    "tns-platform-declarations": "~5.1.2",
     "tslint": "~5.11.0",
-    "typescript": "~3.1.1",
-    "wd": "^1.11.1"
-  }
+    "typescript": "3.9.7",
+    "wd": "^1.11.1",
+    "@nativescript/types": "7.0.0",
+    "@nativescript/webpack": "~3.0.0"
+  },
+  "main": "main.js"
 }
