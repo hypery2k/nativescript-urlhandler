@@ -21,6 +21,8 @@
 > Also via [greenaddress](https://greenaddress.it/pay/GA3ZPfh7As3Gc2oP6pQ1njxMij88u/)
 
 
+> 💡 Plugin version 2.0.0+ is compatible with NativeScript 7+. If you need to target older NativeScript versions, please stick to plugin version 1.3.0.
+
 
 # Usage
 
@@ -37,8 +39,8 @@ import { handleOpenURL, AppURL } from 'nativescript-urlhandler';
 })
 export class AppComponent {
     constructor() {
-    } 
-    
+    }
+
     ngOnInit(){
         handleOpenURL((appURL: AppURL) => {
             console.log('Got the following appURL', appURL);
@@ -89,10 +91,10 @@ Replace *myapp* with your desired scheme and set launchMode to *singleTask*
 <activity android:name="com.tns.NativeScriptActivity" ... android:launchMode="singleTask"...>
         ...
     <intent-filter>
-    <data android:scheme="myapp" /> 
-    <action android:name="android.intent.action.VIEW" /> 
-    <category android:name="android.intent.category.DEFAULT" /> 
-    <category android:name="android.intent.category.BROWSABLE" /> 
+    <data android:scheme="myapp" />
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <category android:name="android.intent.category.BROWSABLE" />
     </intent-filter>
 ```
 
@@ -107,7 +109,7 @@ For example:
   <intent-filter>
       <action android:name="android.intent.action.VIEW" />
       <category android:name="android.intent.category.DEFAULT" />
-      <category android:name="android.intent.category.BROWSABLE" /> 
+      <category android:name="android.intent.category.BROWSABLE" />
       <data android:scheme="myapp" android:host="__PACKAGE__" />
   </intent-filter>
 </activity>
@@ -142,7 +144,7 @@ The "handleOpenURL" callback must be called before application initialization, o
 
 ```
     No callback provided. Please ensure that you called "handleOpenURL" during application init!
-``` 
+```
 
 ## Webpack
 
@@ -180,7 +182,7 @@ If your Webpack Build is failing, try adapting your tsconfig to this:
 
 ## HTTPS intent
 
-This lib also support HTTPS intent, you can define a host for it. Here is an example on Android with both custom & HTTPS scheme : 
+This lib also support HTTPS intent, you can define a host for it. Here is an example on Android with both custom & HTTPS scheme :
 
 ```xml
 <intent-filter>
@@ -197,7 +199,7 @@ This lib also support HTTPS intent, you can define a host for it. Here is an exa
 </intent-filter>
 ```
 
-Let's suppose your put a `<a href="https://my-website.com/check-our-app">Check our mobile app</a>` link on your website to open your mobile app. 
+Let's suppose your put a `<a href="https://my-website.com/check-our-app">Check our mobile app</a>` link on your website to open your mobile app.
 Because https intent is also linked to the mobile browser, when user will tap on the link, a popup will appears to let the user choose between the browser and your mobile app to open this link.
 
 In the other hand, if you setup a `android:scheme="my-app"` that only your app react to, putting a  `<a href="my-app://check-our-app">Check our mobile app</a>` link like this on your website will avoid this popup and open your mobile app directly.
