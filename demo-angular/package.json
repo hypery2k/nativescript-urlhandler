@@ -51,7 +51,7 @@
     "babylon": "6.8.4",
     "filewalker": "0.1.2",
     "jasmine-core": "^2.8.0",
-    "karma": "^4.0.1",
+    "karma": "^6.4.1",
     "karma-jasmine": "1.1.2",
     "karma-nativescript-launcher": "^0.4.0",
     "lazy": "1.0.11",
